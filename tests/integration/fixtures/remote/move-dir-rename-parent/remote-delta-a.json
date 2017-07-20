@@ -1,0 +1,61 @@
+{
+  "reset": false,
+  "cursor": "b",
+  "has_more": false,
+  "nodes": [
+    {
+      "id": "1",
+      "directory": true,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "path": "/a"
+    },
+    {
+      "id": "1",
+      "directory": true,
+      "deleted": false,
+      "created": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "parent": null,
+      "path": "/c",
+      "size": 1
+    },
+    {
+      "id": "2",
+      "directory": true,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "path": "/c/b"
+    },
+    {
+      "id": "2",
+      "directory": true,
+      "deleted": false,
+      "created": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "parent": null,
+      "path": "/b",
+      "size": 1
+    }
+  ]
+}

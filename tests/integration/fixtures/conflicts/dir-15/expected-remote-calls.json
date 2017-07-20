@@ -1,0 +1,6 @@
+[
+  {"action": "createCollection", "name": "a.b", "parent": "/a"},
+  {"action": "deleteNode", "remoteId": "2"},
+  {"action": "uploadFile", "name": "a.txt", "parent": "/a/a.b"},
+  {"action": "getAttributes", "name": "a.txt", "parent": "/a/a.b", "attributes": ["hash", "version", "id"]}
+]

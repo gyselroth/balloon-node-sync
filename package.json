@@ -1,0 +1,47 @@
+{
+  "name": "@gyselroth/balloon-node-sync",
+  "version": "0.0.17",
+  "description": "Sync client for balloon",
+  "author": "gyselroth GmbH  <info@gysleroth.com>",
+  "copyright": "© 2016, gyselroth GmbH",
+  "homepage": "https://www.gyselroth.com",
+  "license": "GPLv3",
+  "main": "sync.js",
+  "directories": {
+    "test": "tests"
+  },
+  "bugs": {
+    "url": "https://github.com/gyselroth/balloon-node-sync/issues"
+  },
+  "scripts": {
+    "test": "npm run test-unit && npm run test-integration",
+    "test-integration": "cross-env FILENAMES_FIRST=true STACK_LIMIT=10 mocha tests/integration/*.js --reporter dot --require mocha-clean",
+    "test-unit": "cross-env FILENAMES_FIRST=true STACK_LIMIT=1 mocha tests/unit/*.js --reporter dot --require mocha-clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gyselroth/balloon-node-sync.git"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-sinon": "^2.8.1",
+    "cross-env": "^3.1.4",
+    "md5": "^2.2.1",
+    "mocha": "^3.2.0",
+    "mocha-clean": "^1.0.0",
+    "mockdate": "^2.0.1",
+    "request-debug": "^0.2.0",
+    "sinon": "^1.17.6"
+  },
+  "dependencies": {
+    "async": "^2.4.1",
+    "dateformat": "^2.0.0",
+    "fs-extra": "^1.0.0",
+    "md5-file": "^3.1.1",
+    "nedb": "^1.8.0",
+    "request": "^2.79.0",
+    "unorm": "^1.4.1",
+    "uuid4": "^1.0.0",
+    "winston": "^2.3.1"
+  }
+}

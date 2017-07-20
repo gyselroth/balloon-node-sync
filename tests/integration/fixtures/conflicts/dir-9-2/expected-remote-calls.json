@@ -1,0 +1,5 @@
+[
+  {"action": "createCollection", "name": "a", "parent": "/"},
+  {"action": "uploadFile", "name": "b.txt", "parent": "/a"},
+  {"action": "getAttributes", "name": "b.txt", "parent": "/a", "attributes": ["hash", "version", "id"]}
+]

@@ -1,0 +1,3 @@
+[
+  {"action": "downloadFile", "remoteId": "1", "name": "b.txt", "parent": "/a"}
+]

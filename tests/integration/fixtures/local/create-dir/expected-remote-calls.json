@@ -1,0 +1,4 @@
+[
+  {"action": "createCollection", "name": "c", "parent": "/"},
+  {"action": "createCollection", "name": "a", "parent": "/c"}
+]

@@ -1,0 +1,5 @@
+[
+  {"action": "renameNode", "remoteId": "4", "name": "a-conflict-username-20.01.2017-00.00.txt"},
+  {"action": "moveNode", "remoteId": "4", "parent": "/c"},
+  {"action": "deleteNode", "remoteId": "3"}
+]

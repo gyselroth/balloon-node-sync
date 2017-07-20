@@ -1,0 +1,9 @@
+{
+  "/": [
+    {"name": "a", "stat": {"ino": "1", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/", "directory": true},
+    {"name": "a-readonlyconflicts", "stat": {"ino": "3", "size": 2, "mtime": "2017-01-20T00:00:00.000Z", "ctime": "2017-01-20T00:00:00.000Z"}, "parent": "/", "directory": true}
+  ],
+  "/a-readonlyconflicts": [
+    {"name": "b", "stat": {"ino": "2", "size": 2, "mtime": "2017-01-20T00:00:00.000Z", "ctime": "2017-01-20T00:00:00.000Z"}, "parent": "/a-readonlyconflicts", "directory": true}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "/": [
+    {"name": "a", "stat": {"ino": "1", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/", "directory": true},
+    {"name": "b", "stat": {"ino": "2", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/", "directory": true},
+    {"name": "c", "stat": {"ino": "3", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/", "directory": true}
+  ],
+  "/c": [
+    {"name": "a-conflict-username-20.01.2017-00.00.txt", "stat": {"ino": "5", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/c", "directory": false},
+    {"name": "a.txt", "stat": {"ino": "4", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/c", "directory": false}
+  ]
+}

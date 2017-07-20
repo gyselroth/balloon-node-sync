@@ -1,0 +1,3 @@
+[
+  {"identifier": {"action": "deleteNode", "name": "a.txt", "parent": "/", "remoteId": "1"}, "err": {"code": "E_BLN_API_REQUEST_NODE_READ_ONLY"}}
+]

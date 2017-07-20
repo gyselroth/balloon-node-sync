@@ -1,0 +1,3 @@
+[
+  {"identifier": {"action": "deleteNode", "remoteId": "2"}, "err": {"code": "E_BLN_API_REQUEST_READ_ONLY_SHARE"}}
+]

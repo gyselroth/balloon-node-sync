@@ -1,0 +1,29 @@
+{
+  "reset": false,
+  "cursor": "c",
+  "has_more": false,
+  "nodes": [
+    {
+      "id": "2",
+      "directory": true,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "path": "/b"
+    },
+    {
+      "id": "4",
+      "directory": true,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "path": "/c/a"
+    }
+  ]
+}

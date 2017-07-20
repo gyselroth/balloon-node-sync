@@ -1,0 +1,3 @@
+[
+  {"action": "createCollection", "name": "a.b", "parent": "/a"}
+]

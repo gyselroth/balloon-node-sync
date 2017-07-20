@@ -1,0 +1,37 @@
+{
+  "reset": false,
+  "cursor": "a",
+  "has_more": false,
+  "nodes": [
+    {
+      "hash": "b6d767d2f8ed5d21a44b0e5886680cb9",
+      "version": 2,
+      "id": "3",
+      "directory": false,
+      "deleted": false,
+      "path": "/a.txt",
+      "changed": { "sec": "1488385871", "usec": "770000" },
+      "created": { "sec": "1488385843", "usec": "573000" },
+      "parent": "",
+      "size": 2
+    }, {
+      "hash": "6512bd43d9caa6e02c990b0a82652dca",
+      "version": 1,
+      "id": "1",
+      "directory": false,
+      "deleted": false,
+      "path": "/a/a.txt",
+      "changed": { "sec": "1488385871", "usec": "770000" },
+      "created": { "sec": "1488385843", "usec": "573000" },
+      "parent": "2",
+      "size": 4
+    }, {
+      "id": "3",
+      "deleted": true,
+      "created": null,
+      "changed": { "sec": "1488906342", "usec": "979000" },
+      "path": "/New file.txt",
+      "directory": false
+    }
+  ]
+}

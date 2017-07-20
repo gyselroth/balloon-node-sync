@@ -1,0 +1,5 @@
+[
+  {"action": "downloadFile", "remoteId": "1", "name": "a.txt", "parent": "/"},
+  {"action": "uploadFile", "name": "a-conflict-username-20.01.2017-00.00.txt", "parent": "/"},
+  {"action": "getAttributes", "name": "a-conflict-username-20.01.2017-00.00.txt", "parent": "/", "attributes": ["hash", "version", "id"]}
+]

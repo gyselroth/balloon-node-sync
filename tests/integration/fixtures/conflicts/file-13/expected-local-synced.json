@@ -1,0 +1,5 @@
+[
+  {"name":"a","ino":"1","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"1","remoteParent":"","localParent":null,"_id":"0"},
+  {"name":"b-conflict-remote-20.01.2017-00.00.txt","ino":"2","size":2,"hash":"6512bd43d9caa6e02c990b0a82652dca","version":1,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/a","directory":false,"remoteId":"2","remoteParent":"1","localParent":"0","_id":"1"},
+  {"name":"b.txt","ino":"3","size":2,"hash":"a6ce4de82c896fceca0e180d6e1e9916","version":1,"mtime":"2017-01-20T00:00:00.000Z","ctime":"2017-01-20T00:00:00.000Z","parent":"/a","directory":false,"remoteId":"/a/b.txt","remoteParent":"1","localParent":"0","_id":"2"}
+]

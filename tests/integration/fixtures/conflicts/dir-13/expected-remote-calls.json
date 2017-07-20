@@ -1,0 +1,4 @@
+[
+  {"action": "moveNode", "remoteId": "1", "parent": "/b"},
+  {"action": "createCollection", "name": "a", "parent": "/"}
+]

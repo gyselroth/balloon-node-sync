@@ -1,0 +1,4 @@
+[
+  {"action": "uploadFile", "name": "c.txt", "parent": "/b"},
+  {"action": "getAttributes", "name": "c.txt", "parent": "/b", "attributes": ["hash", "version", "id"]}
+]

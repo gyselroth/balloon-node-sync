@@ -1,0 +1,4 @@
+[
+  {"identifier": {"action": "createCollection", "name": "b", "parent": "/a"}, "err": {"code": "E_BLN_API_REQUEST_NODE_READ_ONLY"}},
+  {"identifier": {"action": "getAttributes", "name": "a", "parent": "/", "attributes": [ "share", "access", "readonly", "id"]}, "result": {"readonly": true, "share": false, "id": "1"}}
+]

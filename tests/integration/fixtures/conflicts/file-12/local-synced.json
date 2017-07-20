@@ -1,0 +1,7 @@
+[
+  {"name":"a","ino":"1","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"1","remoteParent":"","localParent":null,"_id":"0"},
+  {"name":"b","ino":"2","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"2","remoteParent":"","localParent":null,"_id":"1"},
+  {"name":"c","ino":"3","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"3","remoteParent":"","localParent":null,"_id":"2"},
+  {"name":"a.txt","ino":"4","size":2,"hash":"6512bd43d9caa6e02c990b0a82652dca","version":1,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/a","directory":false,"remoteId":"4","remoteParent":"1","localParent":"0","_id":"3"},
+  {"name":"a.txt","ino":"5","size":2,"hash":"5871efe39f41adb828d95ae1b5d7ce87","version":1,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/b","directory":false,"remoteId":"5","remoteParent":"2","localParent":"1","_id":"4"}
+]

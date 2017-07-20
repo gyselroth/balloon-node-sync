@@ -1,0 +1,4 @@
+[
+  {"action": "createCollection", "name": "b", "parent": "/a"},
+  {"action": "getAttributes", "name": "a", "parent": "/", "attributes": [ "share", "access", "readonly", "id"]}
+]

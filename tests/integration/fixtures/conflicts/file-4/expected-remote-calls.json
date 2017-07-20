@@ -1,0 +1,4 @@
+[
+  {"action": "uploadFile", "name": "b-conflict-username-20.01.2017-00.00.txt", "parent": "/a"},
+  {"action": "getAttributes", "name": "b-conflict-username-20.01.2017-00.00.txt", "parent": "/a", "attributes": ["hash", "version", "id"]}
+]

@@ -1,0 +1,19 @@
+{
+  "reset": false,
+  "cursor": "a",
+  "has_more": false,
+  "nodes": [
+    {
+      "hash": "1462937e7fc9f661564340b31f7faabd",
+      "version": 2,
+      "id": "1",
+      "directory": false,
+      "deleted": false,
+      "path": "/a.txt",
+      "changed": { "sec": "1488385871", "usec": "770000" },
+      "created": { "sec": "1488385843", "usec": "573000" },
+      "parent": "",
+      "size": 2
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[
+  {"action": "renameNode", "remoteId": "1", "name": "b.txt"},
+  {"action": "moveNode", "remoteId": "1", "parent": "/a"},
+  {"action": "uploadFile", "name": "b.txt", "parent": "/a"},
+  {"action": "getAttributes", "name": "b.txt", "parent": "/a", "attributes": ["hash", "version", "id"]}
+]

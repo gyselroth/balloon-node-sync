@@ -1,0 +1,8 @@
+{
+  "/": [
+    {"name": "b", "stat": {"ino": "3", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/", "directory": true}
+  ],
+  "/b": [
+    {"name": "b.txt", "stat": {"ino": "2", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/b", "directory": false}
+  ]
+}

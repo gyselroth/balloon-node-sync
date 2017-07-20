@@ -1,0 +1,4 @@
+[
+  {"action": "moveNode", "remoteId": "2", "parent": "/"},
+  {"action": "renameNode", "remoteId": "3", "name": "d.txt"}
+]

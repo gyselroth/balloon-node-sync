@@ -1,0 +1,11 @@
+{
+  "/": [
+    {"name": "a", "stat": {"ino": "3", "size": 2, "mtime": "2017-01-20T00:00:00.000Z", "ctime": "2017-01-20T00:00:00.000Z"}, "parent": "/", "directory": true}
+  ],
+  "/a": [
+    {"name": "a.b", "stat": {"ino": "4", "size": 2, "mtime": "2017-01-20T00:00:00.000Z", "ctime": "2017-01-20T00:00:00.000Z"}, "parent": "/a", "directory": true}
+  ],
+  "/a/a.b": [
+    {"name": "a.txt", "stat": {"ino": "5", "size": 2, "mtime": "2017-01-20T00:00:00.000Z", "ctime": "2017-01-20T00:00:00.000Z"}, "parent": "/a/a.b", "directory": false}
+  ]
+}

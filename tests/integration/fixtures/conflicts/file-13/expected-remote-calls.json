@@ -1,0 +1,5 @@
+[
+  {"action": "renameNode", "name": "b-conflict-remote-20.01.2017-00.00.txt", "remoteId": "2"},
+  {"action": "uploadFile", "name": "b.txt", "parent": "/a"},
+  {"action": "getAttributes", "name": "b.txt", "parent": "/a", "attributes": ["hash", "version", "id"]}
+]

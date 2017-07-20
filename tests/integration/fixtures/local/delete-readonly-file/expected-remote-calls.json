@@ -1,0 +1,4 @@
+[
+  {"action": "deleteNode", "remoteId": "1"},
+  {"action": "downloadFile", "remoteId": "1", "name": "a.txt", "parent": "/"}
+]

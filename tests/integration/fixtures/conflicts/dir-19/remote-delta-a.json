@@ -1,0 +1,34 @@
+{
+  "reset": false,
+  "cursor": "a",
+  "has_more": false,
+  "nodes": [
+    {
+      "id": "1",
+      "directory": true,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "path": "/a"
+    },
+    {
+      "id": "1",
+      "directory": true,
+      "deleted": false,
+      "created": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "changed": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "parent": null,
+      "size": 0,
+      "path": "/c"
+    }
+  ]
+}
