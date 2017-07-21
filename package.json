@@ -5,7 +5,7 @@
   "author": "gyselroth GmbH  <info@gysleroth.com>",
   "copyright": "© 2016, gyselroth GmbH",
   "homepage": "https://www.gyselroth.com",
-  "license": "GPLv3",
+  "license": "MIT",
   "main": "sync.js",
   "directories": {
     "test": "tests"
