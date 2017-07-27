@@ -146,6 +146,18 @@ describe('local', function() {
     {
       'title': 'Creates a directory even when it\'s parent has been renamed',
       'fixtures': 'local/create-dir-rename-parent'
+    },
+    {
+      'title': 'Resolves conflict when file has been renamed in readonly share',
+      'fixtures': 'local/rename-file-in-readonly-share'
+    },
+    {
+      'title': 'Resolves conflict when file has been moved in readonly share',
+      'fixtures': 'local/move-file-in-readonly-share'
+    },
+    {
+      'title': 'Resolves conflict when file has been renamed and moved in readonly share',
+      'fixtures': 'local/renamemove-file-in-readonly-share'
     }
   ];
 
