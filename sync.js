@@ -11,6 +11,7 @@ var delta = require('./lib/delta/delta.js');
 var fsWrap = require('./lib/fs-wrap.js');
 var garbageCollector = require('./lib/garbage-collector.js');
 var lastCursor = require('./lib/last-cursor.js');
+var ignoreDb = require('./lib/ignore-db.js');
 var logger = require('./lib/logger.js');
 var loggingUtilityFactory = require('./lib/logging-utility-factory.js');
 var remoteDeltaLogDb = require('./lib/delta/remote-delta-log-db.js');
@@ -96,6 +97,10 @@ var syncFactory = function($config, $logger) {
         (cb) => {
           if(stopped) return cb(null);
 
+          this.populateIgnoreDb(cb);
+        },
+        (cb) => {
+          if(stopped) return cb(null);
           delta.getDelta('/', lastCursor.get(), (err, cursor) => {
             newCursor = cursor;
             cb(err);
@@ -167,6 +172,16 @@ var syncFactory = function($config, $logger) {
           garbageCollector.run(cb);
         }
       ], callback);
+    },
+
+    populateIgnoreDb: function(callback) {
+      var ignoreNodes = config.get('ignoreNodes') || [];
+
+      blnApi.getAttributesByIds(ignoreNodes, ['path', 'id'], (err, nodes) => {
+        if(err) return callback(err);
+
+        ignoreDb.insertNodes(nodes, callback);
+      });
     },
 
     checkConfigDirAccess: function(callback) {
@@ -433,6 +448,11 @@ var syncFactory = function($config, $logger) {
           if(stopped) return cb(null);
 
           syncDb.connect(configDir, cb);
+        },
+        (cb) => {
+          if(stopped) return cb(null);
+
+          ignoreDb.connect(configDir, cb);
         },
         (cb) => {
           if(stopped) return cb(null);

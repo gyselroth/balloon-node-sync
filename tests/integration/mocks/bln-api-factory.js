@@ -79,6 +79,15 @@ module.exports = function(pathFixtures) {
       callback(err, result);
     },
 
+    getAttributesByIds: function(id, attributes, callback) {
+      if(!!(attributes && attributes.constructor && attributes.call && attributes.apply)) {
+        callback = attributes;
+        attributes = [];
+      }
+
+      return callback(null, []);
+    },
+
     renameNode: function(node, callback) {
       var identifier = {action: 'renameNode', remoteId: node.remoteId, name: node.name};
       calls.push(identifier);
