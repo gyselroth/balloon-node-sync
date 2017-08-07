@@ -430,13 +430,17 @@ var syncFactory = function($config, $logger) {
           return syncDb.remove(node._id, cb);
         }
 
-        node.localParent = parentNode._id;
-        node.remoteParent = parentNode.remoteId;
+        try {
+          node.localParent = parentNode._id;
+          node.remoteParent = parentNode.remoteId;
 
-        delete node.localActions;
-        delete node.remoteActions;
+          delete node.localActions;
+          delete node.remoteActions;
 
-        return syncDb.update(node._id, node, cb);
+          return syncDb.update(node._id, node, cb);
+        } catch(err) {
+          cb(err);
+        }
       }, callback);
     },
 
