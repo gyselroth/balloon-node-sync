@@ -1,0 +1,37 @@
+{
+  "reset": false,
+  "cursor": "a",
+  "has_more": false,
+  "nodes": [
+    {
+      "hash": "6d85622054f21244f6974b368a35130c",
+      "version": 1,
+      "size": 2,
+      "id": "2",
+      "directory": false,
+      "deleted": false,
+      "created": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "parent": "",
+      "path": "/a.txt"
+    },
+    {
+      "id": "2",
+      "directory": false,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "parent": "",
+      "path": "/New File.txt"
+    }
+  ]
+}

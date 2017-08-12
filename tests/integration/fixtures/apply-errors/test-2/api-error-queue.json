@@ -1,0 +1,19 @@
+[
+  {
+    "err": {"errno":-4058,"code":"ENOENT","syscall":"rename","path":"/Users/username/.balloon/tmp/4805aa7f-7b9f-455f-b7a1-23d6da915829","dest":"/Users/username/Balloon/New File.txt"},
+    "task": {
+      "action":"download",
+      "created":"2017-01-19T00:00:00.000Z",
+      "node": {
+        "name":"New File.txt", "parent":"/", "directory":false,"remoteParent":"","_id":"1",
+        "remoteActions": {
+          "create":{
+            "hash":"6d85622054f21244f6974b368a35130c","version":1,"remoteId":"2", "remoteParent":"","parent":"/","size":2, "actionInitialized":"2017-01-19T00:00:00.000Z"
+          }
+        }
+      }
+    },
+    "origin":"remote",
+    "_id":"0"
+  }
+]

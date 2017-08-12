@@ -10,6 +10,10 @@ describe('apply-errors', function() {
     {
       'title': 'Download with EPERM is rescheduled',
       'fixtures': 'apply-errors/test-1'
+    },
+    {
+      'title': 'Download is not rescheduled if node delta contains a newer version',
+      'fixtures': 'apply-errors/test-2'
     }
   ];
 

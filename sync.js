@@ -518,26 +518,50 @@ var syncFactory = function($config, $logger) {
               if(err) return callback(err);
 
               if(!syncedNode) {
-                syncDb.create(errorNode, (err) => {
-                  if(err) return callback(err);
+                var remoteId = getRemoteId(errorNode);
+                var query = {$or: [
+                  {remoteId: remoteId},
+                  {'remoteActions.create.remoteId': remoteId},
+                  {'remoteActions.renamemove.remoteId': remoteId},
+                  {'remoteActions.delete.remoteId': remoteId},
+                ]};
 
-                  removeError(error._id, callback);
+                syncDb.find(query, (err, syncedNode) => {
+                  if(!syncedNode) {
+                    syncDb.create(errorNode, (err) => {
+                      if(err) return callback(err);
+
+                      removeError(error._id, callback);
+                    });
+                  } else {
+                    createNodeByError(errorOrigin, errorNode, task, syncedNode, callback);
+                  }
                 });
               } else if(errorAction) {
-                var actionValue = errorNode.remoteActions.create;
-                actionValue.actionInitialized = task.created;
-
-                addNodeAction(syncedNode, errorOrigin, {key: 'create', value: actionValue}, (err) => {
-                  if(err) return callback(err);
-
-                  removeError(error._id, callback);
-                });
+                createNodeByError(errorOrigin, errorNode, task, syncedNode, callback);
               } else {
                 //directory already present
                 removeError(error._id, callback);
               }
             });
           break;
+        }
+
+        function getRemoteId(node) {
+          if(node.remoteId) return node.remoteId;
+
+          return node.remoteActions.create.remoteId || node.remoteActions.renamemove.remoteId || node.remoteActions.delete.remoteId;
+        }
+
+        function createNodeByError(origin, errorNode, task, node, callback) {
+          var actionValue = errorNode.remoteActions.create;
+          actionValue.actionInitialized = task.created;
+
+          addNodeAction(node, origin, {key: 'create', value: actionValue}, (err) => {
+            if(err) return callback(err);
+
+            removeError(error._id, callback);
+          });
         }
 
         function addNodeActionByLocalId(id, origin, action, callback) {
