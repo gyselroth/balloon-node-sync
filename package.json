@@ -1,6 +1,6 @@
 {
   "name": "@gyselroth/balloon-node-sync",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Sync client for balloon",
   "author": "gyselroth GmbH  <info@gysleroth.com>",
   "copyright": "© 2016, gyselroth GmbH",
