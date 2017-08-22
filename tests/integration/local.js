@@ -158,6 +158,10 @@ describe('local', function() {
     {
       'title': 'Resolves conflict when file has been renamed and moved in readonly share',
       'fixtures': 'local/renamemove-file-in-readonly-share'
+    },
+    {
+      'title': 'Resolves conflict when file has been renamed and moved into a newly created directory in a readonly share',
+      'fixtures': 'local/readonly-share-1'
     }
   ];
 
