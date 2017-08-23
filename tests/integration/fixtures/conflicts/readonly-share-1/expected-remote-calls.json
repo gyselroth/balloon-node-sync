@@ -1,0 +1,4 @@
+[
+  {"action": "moveNode", "remoteId": "5", "parent": "/a/c"},
+  {"action": "deleteNode", "remoteId": "4"}
+]

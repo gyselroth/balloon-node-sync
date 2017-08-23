@@ -102,6 +102,10 @@ describe('conflicts', function() {
       'title': 'local create file and remote move of parent dir are merged',
       'fixtures': 'conflicts/dir-20'
     },
+    {
+      'title': 'remote rename and local rename of two different directories with the same target are resolved in a readonly share',
+      'fixtures': 'conflicts/readonly-share-1'
+    },
 
 
 

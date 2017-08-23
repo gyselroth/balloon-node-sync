@@ -281,19 +281,18 @@ module.exports = function(pathFixtures) {
     mkdirp: function(dirPath, callback) {
       var pathArr = dirPath.split('/').filter(node => {return node.length > 0});
       var currentPath = '/';
-      var currrentParent;
+      var currentParent;
       var currentChild;
 
       async.whilst(
         () => {
-
           currentParent = currentPath;
           currentChild = pathArr.shift();
 
           return currentChild !== undefined;
         },
         (cb) => {
-          var currentPath = utility.joinPath(currentParent, currentChild);
+          currentPath = utility.joinPath(currentParent, currentChild);
 
           if(!this.existsSync(currentPath)) {
             return this.mkdir(currentPath, cb);
