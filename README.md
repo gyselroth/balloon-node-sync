@@ -15,4 +15,4 @@ To install the package via dependencies add @gyselroth/balloon-node-sync to your
 "dependencies": {
   "@gyselroth/balloon-node-sync": "*"
 }
-'''
+```
