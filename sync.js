@@ -185,11 +185,11 @@ var syncFactory = function($config, $logger) {
     },
 
     checkConfigDirAccess: function(callback) {
-      var configDirPath = config.get('configDir');
+      var instanceDirPath = config.get('instanceDir');
 
-      if(!fs.existsSync(configDirPath)) return callback(new BlnConfigError('ConfigDir \'' + configDirPath + '\'doesn\'t exist', 'E_BLN_CONFIG_CONFIGDIR_NOTEXISTS'));
+      if(!fs.existsSync(instanceDirPath)) return callback(new BlnConfigError('ConfigDir \'' + instanceDirPath + '\'doesn\'t exist', 'E_BLN_CONFIG_CONFIGDIR_NOTEXISTS'));
 
-      checkAccessRecursive(configDirPath, (err) => {
+      checkAccessRecursive(instanceDirPath, (err) => {
         callback(err);
       });
 
@@ -445,33 +445,33 @@ var syncFactory = function($config, $logger) {
     },
 
     connectDbs: function(callback) {
-      var configDir = config.get('configDir');
+      var instanceDir = config.get('instanceDir');
 
       async.parallel([
         (cb) => {
           if(stopped) return cb(null);
 
-          syncDb.connect(configDir, cb);
+          syncDb.connect(instanceDir, cb);
         },
         (cb) => {
           if(stopped) return cb(null);
 
-          ignoreDb.connect(configDir, cb);
+          ignoreDb.connect(instanceDir, cb);
         },
         (cb) => {
           if(stopped) return cb(null);
 
-          queueErrorDb.connect(configDir, cb);
+          queueErrorDb.connect(instanceDir, cb);
         },
         (cb) => {
           if(stopped) return cb(null);
 
-          transferDb.connect(configDir, cb);
+          transferDb.connect(instanceDir, cb);
         },
         (cb) => {
           if(stopped) return cb(null);
 
-          remoteDeltaLogDb.connect(configDir, cb);
+          remoteDeltaLogDb.connect(instanceDir, cb);
         }
       ], callback);
     },
@@ -597,18 +597,26 @@ var syncFactory = function($config, $logger) {
 function validateConfiguration(config) {
   if(config.context === 'test') return null;
 
-  if(!config.accessToken && (!config.username || !config.password)) {
-    return new BlnConfigError('Neither acessToken nor username/password set', 'E_BLN_CONFIG_CREDENTIALS');
-  } else if(!config.balloonDir) {
-    return new BlnConfigError('BalloonDir is not set', 'E_BLN_CONFIG_BALLOONDIR');
-  } else if(!config.configDir) {
-    return new BlnConfigError('ConfigDir is not set', 'E_BLN_CONFIG_CONFIGDIR');
-  } else if(!config.apiUrl) {
-    return new BlnConfigError('ApiUrl is not set', 'E_BLN_CONFIG_APIURL');
-  } else {
+  //TODO for API usage only we do not need those configurations, for example GET /user/whoami
+  if(!config.instanceDir) {
+    return null;
+  }
 
-    var pathDb = path.join(config.configDir, 'db/nodes.db');
-    var pathCursor = path.join(config.configDir, 'last-cursor');
+  if(!config.authMethod) {
+    return new BlnConfigError('authMethod not set', 'E_BLN_CONFIG_CREDENTIALS');
+  } else if(!config.authMethod === 'oidc' && !config.accessToken) {
+    return new BlnConfigError('No accessToken set for oidc authentication', 'E_BLN_CONFIG_CREDENTIALS');
+  } else if(!config.authMethod === 'basic' && !config.username) {
+    return new BlnConfigError('No username set for basuc authentication', 'E_BLN_CONFIG_CREDENTIALS');
+  } else if(!config.balloonDir) {
+    return new BlnConfigError('balloonDir is not set', 'E_BLN_CONFIG_BALLOONDIR');
+  } else if(!config.instanceDir) {
+    return new BlnConfigError('instanceDir is not set', 'E_BLN_CONFIG_CONFIGDIR');
+  } else if(!config.apiUrl) {
+    return new BlnConfigError('apiUrl is not set', 'E_BLN_CONFIG_APIURL');
+  } else {
+    var pathDb = path.join(config.instanceDir, 'db/nodes.db');
+    var pathCursor = path.join(config.instanceDir, 'last-cursor');
 
     var dbExists = fs.existsSync(pathDb);
     var cursorExists = fs.existsSync(pathCursor);
@@ -626,8 +634,8 @@ function validateConfiguration(config) {
       }
     }
 
-    var pathTemp = path.join(config.configDir, 'temp');
-    if(!fs.existsSync(config.configDir)) fs.mkdirSync(config.configDir);
+    var pathTemp = path.join(config.instanceDir, 'temp');
+    if(!fs.existsSync(config.instanceDir)) fs.mkdirSync(config.instanceDir);
     if(!fs.existsSync(pathTemp)) fs.mkdirSync(pathTemp);
   }
 
