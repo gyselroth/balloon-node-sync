@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "npm run test-unit && npm run test-integration",
-    "test-integration": "cross-env FILENAMES_FIRST=true STACK_LIMIT=10 mocha tests/integration/*.js --reporter dot --require mocha-clean",
+    "test-integration": "cross-env FILENAMES_FIRST=true STACK_LIMIT=10 mocha tests/integration/*.js --reporter dot --require mocha-clean --bail --timeout 10000",
     "test-unit": "cross-env FILENAMES_FIRST=true STACK_LIMIT=1 mocha tests/unit/*.js --reporter dot --require mocha-clean"
   },
   "repository": {
