@@ -11,8 +11,6 @@ You can get the package via npm registry:\
 https://www.npmjs.com/package/@gyselroth/balloon-node-sync
 
 To install the package via dependencies add @gyselroth/balloon-node-sync to your package.json: 
-```javascript
-"dependencies": {
-  "@gyselroth/balloon-node-sync": "*"
-}
+```
+npm install --save @gyselroth/balloon-node-sync
 ```
