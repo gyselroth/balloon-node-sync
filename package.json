@@ -45,6 +45,6 @@
     "winston": "^2.3.1"
   },
   "optionalDependencies": {
-    "@gyselroth/windows-fsstat": "0.0.4"
+    "@gyselroth/windows-fsstat": "^0.0.6"
   }
 }
