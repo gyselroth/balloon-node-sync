@@ -16,6 +16,10 @@ describe('local', function() {
       'fixtures': 'local/rename-dir'
     },
     {
+      'title': 'Resolves conflict when dir has been renamed to a name that already exists',
+      'fixtures': 'local/rename-dir-in-letterbox-share'
+    },
+    {
       'title': 'Renames directories remotely, does not issue move requests for children',
       'fixtures': 'local/rename-dir-with-children'
     },
