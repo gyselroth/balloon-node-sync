@@ -72,6 +72,10 @@ describe('local', function() {
       'fixtures': 'local/create-file-in-readonly-collection'
     },
     {
+      'title': 'Resolves conflict when directory has been created in letterbox share but target already exists remotely',
+      'fixtures': 'local/create-dir-in-letterbox-share'
+    },
+    {
       'title': 'Resolves conflict when directory has been created in readonly collection',
       'fixtures': 'local/create-dir-in-readonly-collection'
     },
