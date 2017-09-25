@@ -1,0 +1,3 @@
+[
+  {"identifier": {"action": "renameNode", "name": "b.txt", "remoteId": "2"}, "err": {"code": "E_BLN_API_REQUEST_NODE_ALREADY_EXISTS"}}
+]

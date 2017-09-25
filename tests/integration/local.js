@@ -148,6 +148,10 @@ describe('local', function() {
       'fixtures': 'local/create-dir-rename-parent'
     },
     {
+      'title': 'Resolves conflict when file has been renamed in letterbox collection but target file already exists remote',
+      'fixtures': 'local/rename-file-in-letterbox-share'
+    },
+    {
       'title': 'Resolves conflict when file has been renamed in readonly share',
       'fixtures': 'local/rename-file-in-readonly-share'
     },
