@@ -168,6 +168,10 @@ describe('local', function() {
       'fixtures': 'local/move-file-in-readonly-share'
     },
     {
+      'title': 'Resolves conflict when file has been moved in letterbox collection but target file already exists remote',
+      'fixtures': 'local/move-file-in-letterbox-share'
+    },
+    {
       'title': 'Resolves conflict when file has been renamed and moved in readonly share',
       'fixtures': 'local/renamemove-file-in-readonly-share'
     },
