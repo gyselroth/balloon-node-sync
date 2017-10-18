@@ -110,6 +110,10 @@ describe('remote', function() {
     {
       'title': 'Creates a directory even when it\'s parent has been renamed',
       'fixtures': 'remote/create-dir-rename-parent'
+    },
+    {
+      'title': 'Deletes and recreates a directory',
+      'fixtures': 'remote/delete-dir-recreate-dir'
     }
   ];
 

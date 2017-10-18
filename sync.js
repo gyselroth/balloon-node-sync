@@ -368,8 +368,8 @@ var syncFactory = function($config, $logger) {
 
         //check if children of directory contain local changes
         return syncDb.queryChildrenByPath(path, query, (err, changedNodes) => {
-          if(changedNodes.length === 0) {
-            //no create, update or move on any children in opposite, directory can safely be removed
+          if(changedNodes.length === 0 && Object.keys(actions).length === 1) {
+            //no create, update or move on any children in opposite, directory can safely be removed, if actions.delete is the only action
             callback(null);
           } else {
             if(!actions.create) {
