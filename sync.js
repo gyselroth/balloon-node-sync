@@ -590,6 +590,18 @@ var syncFactory = function($config, $logger) {
       } else {
         removeError(error._id, callback);
       }
+    },
+
+    lstatSync: function (nodePath) {
+      return fsWrap.existsSync(nodePath) ? fsWrap.lstatSync(nodePath) : {};
+    },
+
+    find: function (query, callback) {
+      if (!syncDb.isConnected()) {
+        syncDb.connect(config.get('instanceDir'), callback);
+      }
+
+      syncDb.find(query, callback);
     }
   }
 }
