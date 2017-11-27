@@ -614,6 +614,18 @@ SyncFactory.prototype.applyQueueError = function(error, callback) {
   }
 }
 
+SyncFactory.prototype.lstatSync = function(nodePath) {
+  return fsWrap.existsSync(nodePath) ? fsWrap.lstatSync(nodePath) : {};
+}
+
+SyncFactory.prototype.find = function(query, callback) {
+  if (!syncDb.isConnected()) {
+    syncDb.connect(config.get('instanceDir'), callback);
+  }
+
+  syncDb.find(query, callback);
+}
+
 function validateConfiguration(config) {
   if(config.context === 'test') return null;
 
