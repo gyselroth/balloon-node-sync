@@ -1,4 +1,3 @@
 [
-  {"action": "moveNode", "remoteId": "5", "parent": "/a/c"},
-  {"action": "deleteNode", "remoteId": "4"}
+  {"action": "renameNode", "remoteId": "4", "name": "c-conflict-username-20.01.2017-00.00"}
 ]

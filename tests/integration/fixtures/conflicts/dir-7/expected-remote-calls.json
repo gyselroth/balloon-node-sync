@@ -1,4 +1,5 @@
 [
-  {"action": "uploadFile", "name": "b.txt", "parent": "/c"},
-  {"action": "getAttributes", "name": "b.txt", "parent": "/c", "attributes": ["hash", "version", "id"]}
+  {"action": "createCollection", "name": "c-conflict-username-20.01.2017-00.00", "parent": "/"},
+  {"action": "uploadFile", "name": "b.txt", "parent": "/c-conflict-username-20.01.2017-00.00"},
+  {"action": "getAttributes", "name": "b.txt", "parent": "/c-conflict-username-20.01.2017-00.00", "attributes": ["hash", "version", "id"]}
 ]

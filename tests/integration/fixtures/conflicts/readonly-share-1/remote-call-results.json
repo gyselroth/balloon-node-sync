@@ -1,4 +1,3 @@
 [
-  {"identifier": {"action": "moveNode", "remoteId": "5", "parent": "/a/c"}, "err": {"code": "E_BLN_API_REQUEST_READ_ONLY_SHARE"}},
-  {"identifier": {"action": "deleteNode", "remoteId": "4"}, "err": {"code": "E_BLN_API_REQUEST_READ_ONLY_SHARE"}}
+  {"identifier": {"action": "renameNode", "remoteId": "4", "name": "c-conflict-username-20.01.2017-00.00"}, "err": {"code": "E_BLN_API_REQUEST_READ_ONLY_SHARE"}}
 ]
