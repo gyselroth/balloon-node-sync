@@ -295,7 +295,7 @@ SyncFactory.prototype.applyDirectoryChanges = function(node, callback) {
   //do not process invalid actions
   if(actionsErr) return callback(actionsErr);
 
-  this.resolveDirectoryRemoveConflicts(node, (err, results) => {
+  this.resolveDirectoryRemoveConflicts(node, (err, node) => {
     if(err) return callback(err);
 
     var rActions = node.remoteActions;
@@ -376,7 +376,7 @@ SyncFactory.prototype.applyFileChanges = function(node, callback) {
 }
 
 SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback) {
-  function processRemove(node, source, callback) {
+  function processRemove(source, callback) {
     var target = (source === 'remote') ? 'local' : 'remote';
     var actions = node[source + 'Actions'];
     var path = utility.joinPath(node.parent, node.name);
@@ -392,7 +392,8 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
     return syncDb.queryChildrenByPath(path, query, true, (err, changedNodes) => {
       if(changedNodes.length === 0 && Object.keys(actions).length === 1) {
         //no create, update or move on any children in opposite, directory can safely be removed, if actions.delete is the only action
-        callback(null);
+        if(node[target + 'Actions']) delete node[target + 'Actions'];
+        syncDb.update(node._id, node, callback);
       } else {
         if(!actions.create) {
           node[target + 'Actions'] = node[target + 'Actions'] || {};
@@ -424,12 +425,14 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
 
   async.parallel([
     (cb) => {
-      processRemove.call(this, node, 'remote', cb);
+      processRemove.call(this, 'remote', cb);
     },
     (cb) => {
-      processRemove.call(this, node, 'local', cb);
+      processRemove.call(this, 'local', cb);
     }
-  ], callback);
+  ], (err, results) => {
+    callback(err, node);
+  });
 }
 
 SyncFactory.prototype.validateActions = function(node) {
