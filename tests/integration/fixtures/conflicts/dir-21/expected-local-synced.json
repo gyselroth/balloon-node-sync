@@ -1,0 +1,6 @@
+[
+  {"name":"a-conflict-username-20.01.2017-00.00","ino":"1","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"/a-conflict-username-20.01.2017-00.00","remoteParent":"","localParent":null,"_id":"0"},
+  {"name":"a","ino":"2","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"2","remoteParent":"","localParent":null,"_id":"1"},
+  {"name":"a.a","ino":"4","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/a","directory":true,"remoteId":"4","remoteParent":"2","localParent":"1","_id":"3"},
+  {"name":"a.txt","ino":"5","size":4,"version":1,"hash":"b4dc24b41e2fcfe6f21380f8254acffb","mtime":"2017-01-19T00:00:00.000Z","ctime":"2017-01-19T00:00:00.000Z","parent":"/a-conflict-username-20.01.2017-00.00","directory":false,"remoteId":"/a-conflict-username-20.01.2017-00.00/a.txt","remoteParent":"/a-conflict-username-20.01.2017-00.00","localParent":"0","_id":"4"}
+]

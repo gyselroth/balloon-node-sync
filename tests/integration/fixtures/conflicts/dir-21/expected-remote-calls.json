@@ -1,0 +1,5 @@
+[
+  {"action": "createCollection", "name": "a-conflict-username-20.01.2017-00.00", "parent": "/"},
+  {"action": "uploadFile", "name": "a.txt", "parent": "/a-conflict-username-20.01.2017-00.00"},
+  {"action": "getAttributes", "name": "a.txt", "parent": "/a-conflict-username-20.01.2017-00.00", "attributes": ["hash", "version", "id"]}
+]

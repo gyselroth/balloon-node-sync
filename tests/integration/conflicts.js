@@ -103,6 +103,10 @@ describe('conflicts', function() {
       'fixtures': 'conflicts/dir-20'
     },
     {
+      'title': 'local create file and remote delete parent and rename other directory to same name as parent',
+      'fixtures': 'conflicts/dir-21'
+    },
+    {
       'title': 'remote rename and local rename of two different directories with the same target are resolved in a readonly share',
       'fixtures': 'conflicts/readonly-share-1'
     },
