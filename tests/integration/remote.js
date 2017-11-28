@@ -114,6 +114,10 @@ describe('remote', function() {
     {
       'title': 'Deletes and recreates a directory',
       'fixtures': 'remote/delete-dir-recreate-dir'
+    },
+    {
+      'title': 'Deletes directory and renames other directory to path of deleted directory',
+      'fixtures': 'remote/delete-dir-rename-dir'
     }
   ];
 
