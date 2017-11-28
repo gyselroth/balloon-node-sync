@@ -384,7 +384,7 @@ describe('syncDb queryChildrenByPath', function() {
     syncDb.queryChildrenByPath('/c', {'$or': [
       {'remoteActions.create': {$exists: true}},
       {'remoteActions.move': {$exists: true}}
-    ]}, (err, result) => {
+    ]}, false, (err, result) => {
       var expected = [
         {"name":"c.b","ino":"8","parent":"/c","directory":true,"remoteActions": {"create": true},"remoteId":"8","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099dd"},
         {"name":"c.a","ino":"7","parent":"/c","directory":true,"remoteActions": {"move": {"parent": "parent"}},"remoteId":"7","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"603b051dbbb24a2a8a390a4f13f1a575"}
@@ -399,7 +399,7 @@ describe('syncDb queryChildrenByPath', function() {
     syncDb.queryChildrenByPath('/c', {'$or': [
       {'localActions.create': {$exists: true}},
       {'localActions.move': {$exists: true}}
-    ]}, (err, result) => {
+    ]}, false, (err, result) => {
       var expected = [];
 
       assert.deepEqual(result, expected);
@@ -408,13 +408,28 @@ describe('syncDb queryChildrenByPath', function() {
   });
 
   it('should match the path correctly', function(done) {
-    syncDb.queryChildrenByPath('/c', {}, (err, result) => {
+    syncDb.queryChildrenByPath('/c', {}, false, (err, result) => {
       var expected = [
         {"name":"c.b","ino":"8","parent":"/c","directory":true,"remoteActions": {"create": true},"remoteId":"8","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099dd"},
         {"name":"c.txt","ino":"9","parent":"/c","directory":false,"remoteId":"9","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099df"},
         {"name":"b.txt","ino":"10","parent":"/c/c.b","directory":false,"remoteActions": {"rename": {"parent": "parent"}},"remoteId":"10","remoteParent":"8","localParent":"4863767fac8c441fb45e81ba1b1099dd","_id":"4863767fac8c441fb45e81ba1b1099dg"},
         {"name":"c.a","ino":"7","parent":"/c","directory":true,"remoteActions": {"move": {"parent": "parent"}},"remoteId":"7","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"603b051dbbb24a2a8a390a4f13f1a575"},
         {"name":"c","ino":"3","parent":"/","directory":true,"remoteId":"3","remoteParent":"","localParent":null,"_id":"6cd326f8ae41434fb4d95d9ba4843112"},
+        {"name":"c.c","ino":"11","parent":"/c","directory":true,"remoteActions": {"delete": true},"remoteId":"11","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"6cd326f8ae41434fb4d95d9ba4843116"}
+      ];
+
+      assert.deepEqual(result, expected);
+      done();
+    });
+  });
+
+  it('should exclude the parent if excludeSelf is true', function(done) {
+    syncDb.queryChildrenByPath('/c', {}, true, (err, result) => {
+      var expected = [
+        {"name":"c.b","ino":"8","parent":"/c","directory":true,"remoteActions": {"create": true},"remoteId":"8","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099dd"},
+        {"name":"c.txt","ino":"9","parent":"/c","directory":false,"remoteId":"9","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099df"},
+        {"name":"b.txt","ino":"10","parent":"/c/c.b","directory":false,"remoteActions": {"rename": {"parent": "parent"}},"remoteId":"10","remoteParent":"8","localParent":"4863767fac8c441fb45e81ba1b1099dd","_id":"4863767fac8c441fb45e81ba1b1099dg"},
+        {"name":"c.a","ino":"7","parent":"/c","directory":true,"remoteActions": {"move": {"parent": "parent"}},"remoteId":"7","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"603b051dbbb24a2a8a390a4f13f1a575"},
         {"name":"c.c","ino":"11","parent":"/c","directory":true,"remoteActions": {"delete": true},"remoteId":"11","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"6cd326f8ae41434fb4d95d9ba4843116"}
       ];
 

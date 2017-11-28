@@ -389,7 +389,7 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
     query['$or'][2][target + 'Actions.move'] = {$exists: true};
 
     //check if children of directory contain local changes
-    return syncDb.queryChildrenByPath(path, query, (err, changedNodes) => {
+    return syncDb.queryChildrenByPath(path, query, true, (err, changedNodes) => {
       if(changedNodes.length === 0 && Object.keys(actions).length === 1) {
         //no create, update or move on any children in opposite, directory can safely be removed, if actions.delete is the only action
         callback(null);
@@ -406,7 +406,7 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
           //delete all nodes without changes
           syncDb.queryChildrenByPath(path, {'_id': {
             $nin: changedNodes.map(changedNode => {return changedNode._id})
-          }}, (err, nodesToDelete) => {
+          }}, true, (err, nodesToDelete) => {
 
             async.map(nodesToDelete, (nodeToDelete, mapCb) => {
               if(node._id === nodeToDelete._id) return mapCb(null);
