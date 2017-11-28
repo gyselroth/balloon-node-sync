@@ -150,7 +150,7 @@ describe('utility', function() {
     });
   });
 
-  describe('renameConflictFile', function() {
+  describe('renameConflictNode', function() {
     before(function() {
 
       sinon.stub(fs, 'existsSync', function(filename) {
@@ -165,19 +165,19 @@ describe('utility', function() {
     });
 
     it('should append conflicting and username to filename', function() {
-      var result = utility.renameConflictFile('/', 'a.txt');
+      var result = utility.renameConflictNode('/', 'a.txt');
 
       assert.equal(result, 'a-conflict-username-20.01.2017-00.00.txt');
     });
 
     it('should append add a version number if file already exists', function() {
-      var result = utility.renameConflictFile('/', 'b.txt');
+      var result = utility.renameConflictNode('/', 'b.txt');
 
       assert.equal(result, 'b-conflict-username-20.01.2017-00.00 (1).txt');
     });
 
     it('should append add increase version number if file already exists', function() {
-      var result = utility.renameConflictFile('/', 'c.txt');
+      var result = utility.renameConflictNode('/', 'c.txt');
 
       assert.equal(result, 'c-conflict-username-20.01.2017-00.00 (2).txt');
     });
