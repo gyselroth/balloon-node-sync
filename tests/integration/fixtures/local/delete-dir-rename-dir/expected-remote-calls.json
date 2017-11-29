@@ -1,0 +1,11 @@
+[
+  {
+    "action": "deleteNode",
+    "remoteId": "1"
+  },
+  {
+    "action": "renameNode",
+    "name": "a",
+    "remoteId": "3"
+  }
+]
