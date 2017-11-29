@@ -274,7 +274,7 @@ SyncFactory.prototype.processRemove = function(node, callback) {
   }
 
   if(lActions && lActions.delete) {
-    this.actionQueue.push('local', {action: 'remove', node: node, created: lActions.delete.actionInitialized});
+    this.actionQueue.push('local', {action: 'remove', node: node, created: lActions.delete.actionInitialized, immediate: lActions.delete.immediate});
   }
 
   return callback(null);
