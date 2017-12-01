@@ -153,6 +153,30 @@ describe('syncDb', function() {
     });
   });
 
+  describe('findByParentPath', function() {
+    it('should find nodes by its parent path', function(done) {
+      syncDb.findByParentPath('/c', (err, result) => {
+        var expected = [
+          {"name":"c.b","ino":"8","parent":"/c","directory":true,"remoteId":"8","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099dd"},
+          {"name":"c.txt","ino":"9","parent":"/c","directory":false,"remoteId":"9","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099df"},
+          {"name":"c.a","ino":"7","parent":"/c","directory":true,"remoteId":"7","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"603b051dbbb24a2a8a390a4f13f1a575"}
+        ];
+
+        assert.deepEqual(result, expected);
+        done();
+      });
+    });
+
+    it('should return empty array if no node was not found', function(done) {
+      syncDb.findByParentPath('/x', (err, result) => {
+        var expected = [];
+
+        assert.deepEqual(result, expected);
+        done();
+      });
+    });
+  });
+
   describe('getDirectories', function() {
     it('should return all directories', function(done) {
       syncDb.getDirectories((err, result) => {
@@ -308,35 +332,6 @@ describe('syncDb', function() {
             cb();
           });
         }, done);
-      });
-    });
-  });
-
-  describe('findDirectoriesByParent', function() {
-    it('should return all directories of a certain parent', function(done) {
-      syncDb.findDirecotriesByParent('/c', (err, result) => {
-        var expected = [
-          {"name":"c.b","ino":"8","parent":"/c","directory":true,"remoteId":"8","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099dd"},
-          {"name":"c.a","ino":"7","parent":"/c","directory":true,"remoteId":"7","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"603b051dbbb24a2a8a390a4f13f1a575"}
-        ];
-
-        assert.deepEqual(result, expected);
-        done();
-      });
-    });
-  });
-
-  describe('findByParent', function() {
-    it('should return all nodes of a certain parent', function(done) {
-      syncDb.findByParent('/c', (err, result) => {
-        var expected = [
-          {"name":"c.b","ino":"8","parent":"/c","directory":true,"remoteId":"8","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099dd"},
-          {"name":"c.txt","ino":"9","parent":"/c","directory":false,"remoteId":"9","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"4863767fac8c441fb45e81ba1b1099df"},
-          {"name":"c.a","ino":"7","parent":"/c","directory":true,"remoteId":"7","remoteParent":"3","localParent":"6cd326f8ae41434fb4d95d9ba4843112","_id":"603b051dbbb24a2a8a390a4f13f1a575"}
-        ];
-
-        assert.deepEqual(result, expected);
-        done();
       });
     });
   });

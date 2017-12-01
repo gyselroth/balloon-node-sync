@@ -151,7 +151,7 @@ SyncFactory.prototype.run = function(callback) {
     (cb) => {
       if(this.stopped) return cb(null);
 
-      this.processRemoves('/', (err, results) => {
+      this.processRemoves((err, results) => {
         cb(err);
       });
     },
@@ -259,8 +259,8 @@ SyncFactory.prototype.processFileChanges = function(callback) {
   });
 }
 
-SyncFactory.prototype.processRemoves = function(parent, callback) {
-  syncDb.walkTree(parent, true, true, (node, parentNode, cb) => {
+SyncFactory.prototype.processRemoves = function(callback) {
+  syncDb.walkTree('/', true, true, (node, parentNode, cb) => {
     this.processRemove(node, cb);
   }, callback);
 }
@@ -383,10 +383,12 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
 
     if(!actions || !actions.delete) return callback(null);
 
-    var query = {$or: [{}, {}, {}]};
-    query['$or'][0][target + 'Actions.create'] = {$exists: true};
-    query['$or'][1][target + 'Actions.update'] = {$exists: true};
-    query['$or'][2][target + 'Actions.move'] = {$exists: true};
+    var actionsQuery = {$or: [{}, {}, {}]};
+    actionsQuery['$or'][0][target + 'Actions.create'] = {$exists: true};
+    actionsQuery['$or'][1][target + 'Actions.update'] = {$exists: true};
+    actionsQuery['$or'][2][target + 'Actions.move'] = {$exists: true};
+
+    var query = {$and: [actionsQuery]};
 
     //check if children of directory contain local changes
     return syncDb.queryChildrenByPath(path, query, true, (err, changedNodes) => {
@@ -398,6 +400,10 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
         if(!actions.create) {
           node[target + 'Actions'] = node[target + 'Actions'] || {};
           node[target + 'Actions'].create = {immediate: true};
+
+          if(target === 'remote') {
+            node['remoteActions'].create.remoteId = node.remoteId;
+          }
         }
 
         delete node[source + 'Actions'].delete;
@@ -405,19 +411,52 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
 
         syncDb.update(node._id, node, (err, updatedNode) => {
           //delete all nodes without changes
-          syncDb.queryChildrenByPath(path, {'_id': {
-            $nin: changedNodes.map(changedNode => {return changedNode._id})
-          }}, true, (err, nodesToDelete) => {
+          var query = {$and: [
+            {'_id': { $nin: changedNodes.map(changedNode => {return changedNode._id})}}
+          ]};
 
-            async.map(nodesToDelete, (nodeToDelete, mapCb) => {
-              if(node._id === nodeToDelete._id) return mapCb(null);
+          if(target === 'remote') {
+            query['$and'].push({remoteParent: node.remoteId});
+          } else {
+            query['$and'].push({localParent: node._id});
+          }
 
-              nodeToDelete[source + 'Actions'] = nodeToDelete[source + 'Actions'] || {};
-              nodeToDelete[source + 'Actions'].delete = true;
+          async.parallel([
+            (cb) => {
+              syncDb.queryChildrenByPath(path, query, true, (err, nodesToDelete) => {
 
-              syncDb.update(nodeToDelete._id, nodeToDelete, mapCb);
-            }, callback);
-          });
+                async.map(nodesToDelete, (nodeToDelete, mapCb) => {
+                  if(node._id === nodeToDelete._id) return mapCb(null);
+
+                  nodeToDelete[source + 'Actions'] = nodeToDelete[source + 'Actions'] || {};
+                  nodeToDelete[source + 'Actions'].delete = true;
+
+                  syncDb.update(nodeToDelete._id, nodeToDelete, mapCb);
+                }, cb);
+              });
+            },
+            (cb) => {
+              syncDb.findByPath(path, {$not: {_id: node._id}}, (err, conflictingNode) => {
+                if(err || !conflictingNode) return cb(err);
+
+                // TODO pixtron - this is basicaly renameConflictNode from lib/delta/delta.js, use this method as it has better error handling
+                var newLocalName = utility.renameConflictNode(conflictingNode.parent, conflictingNode.name);
+
+                fsWrap.renameSync(path, utility.joinPath(conflictingNode.parent, newLocalName));
+
+                conflictingNode.name = newLocalName;
+
+                conflictingNode.localActions = conflictingNode.localActions || {};
+
+                if(!conflictingNode.localActions.create && !conflictingNode.localActions.rename) {
+                  //rename the node if not localy created or localy renamed (always keep original local rename actions)
+                  conflictingNode.localActions.rename = {immediate: false, actionInitialized: new Date(), oldName: conflictingNode.name};
+                }
+
+                syncDb.update(conflictingNode._id, conflictingNode, cb);
+              });
+            }
+          ], callback);
         });
       }
     });
