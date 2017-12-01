@@ -1,0 +1,36 @@
+{
+  "reset": false,
+  "cursor": "b",
+  "has_more": false,
+  "nodes": [
+    {
+      "id": "5",
+      "directory": false,
+      "deleted": true,
+      "created": null,
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "path": "/a/New File.txt"
+    },
+    {
+      "id": "5",
+      "directory": false,
+      "deleted": false,
+      "created": {
+          "sec": 1481129134,
+          "usec": 771000
+      },
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "parent": "1",
+      "path": "/a/a.txt",
+      "size": 2,
+      "version": 1,
+      "hash": "b4dc24b41e2fcfe6f21380f8254acffb"
+    }
+  ]
+}
