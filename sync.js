@@ -113,6 +113,10 @@ SyncFactory.prototype.run = function(callback) {
       this.connectDbs(cb);
     },
     (cb) => {
+      logger.info('Sync: cleaning up', {category: 'sync.main'});
+      this.cleanup(cb);
+    },
+    (cb) => {
       if(this.stopped) return cb(null);
 
       this.populateIgnoreDb(cb);
@@ -168,10 +172,9 @@ SyncFactory.prototype.run = function(callback) {
 
     var finalizeSync = () => {
       syncEvents.destroy();
-
-      this.cleanup((errCleanup) => {
+      this.cleanup((cleanupErr) => {
         if(err) return callback(err);
-        if(errCleanup) return callback(errCleanup);
+        if(cleanupErr) return callback(cleanupErr);
 
         callback(null, results);
       });
