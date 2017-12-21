@@ -16,7 +16,6 @@ var lastCursor = require('./lib/last-cursor.js');
 var ignoreDb = require('./lib/ignore-db.js');
 var logger = require('./lib/logger.js');
 var loggingUtilityFactory = require('./lib/logging-utility-factory.js');
-var remoteDeltaLogDb = require('./lib/delta/remote-delta-log-db.js');
 var queueErrorDb = require('./lib/queue/queue-error-db.js');
 var syncDb = require('./lib/sync-db.js');
 var syncEvents = require('./lib/sync-events.js')();
@@ -534,11 +533,6 @@ SyncFactory.prototype.connectDbs = function(callback) {
       if(this.stopped) return cb(null);
 
       transferDb.connect(instanceDir, cb);
-    },
-    (cb) => {
-      if(this.stopped) return cb(null);
-
-      remoteDeltaLogDb.connect(instanceDir, cb);
     }
   ], callback);
 }
