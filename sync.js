@@ -15,7 +15,6 @@ var garbageCollector = require('./lib/garbage-collector.js');
 var lastCursor = require('./lib/last-cursor.js');
 var ignoreDb = require('./lib/ignore-db.js');
 var logger = require('./lib/logger.js');
-var loggingUtilityFactory = require('./lib/logging-utility-factory.js');
 var queueErrorDb = require('./lib/queue/queue-error-db.js');
 var syncDb = require('./lib/sync-db.js');
 var syncEvents = require('./lib/sync-events.js')();
@@ -89,23 +88,9 @@ SyncFactory.prototype.run = function(callback) {
 
   this.actionQueue = actionQueueFactory();
 
-  if(config.get('context') === 'development') {
-    var loggingUtility = new loggingUtilityFactory(new Date())
-  }
-
   logger.info('Starting Sync with remote cursor: ' + lastCursor.get());
 
   async.series([
-    (cb) => {
-      //create a snapshot in development context
-      if(this.stopped || config.get('context') !== 'development') return cb(null);
-
-      loggingUtility.createSnapshot('before', err => {
-        if(err) logger.error(err);
-        //always continue to next step - even if taking snapshot was not successfull
-        cb(null);
-      });
-    },
     (cb) => {
       if(this.stopped) return cb(null);
 
@@ -179,9 +164,7 @@ SyncFactory.prototype.run = function(callback) {
       });
     }
 
-    if(config.get('context') !== 'development') return finalizeSync();
-
-    loggingUtility.createSnapshot('after', finalizeSync);
+    return finalizeSync();
   });
 }
 
