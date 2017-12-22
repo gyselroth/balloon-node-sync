@@ -69,13 +69,15 @@ SyncFactory.prototype.stop = function(forceQuit, callback) {
 }
 
 SyncFactory.prototype.start = function(callback) {
+  logger.info('Checking config dir access', {category: 'sync.main'});
+
   this.checkConfigDirAccess((err) => {
     if(err) {
       if(err.code === 'EACCES') {
         err = new BlnConfigError('\'' + err.path + '\' is not accessible', 'E_BLN_CONFIG_CONFIGDIR_ACCES');
       }
 
-      logger.error('Sync: can\'t start sync config access check not successfull', {err});
+      logger.error('Can\'t start sync config access check not successfull', {category: 'sync.main', err});
       return callback(err);
     }
 
@@ -88,31 +90,41 @@ SyncFactory.prototype.run = function(callback) {
 
   this.actionQueue = actionQueueFactory();
 
-  logger.info('Starting Sync with remote cursor: ' + lastCursor.get());
+  logger.info('Starting Sync', {category: 'sync.main', cursor: lastCursor.get()});
 
   async.series([
     (cb) => {
+      logger.info('Connecting databases', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       this.connectDbs(cb);
     },
     (cb) => {
-      logger.info('Sync: cleaning up', {category: 'sync.main'});
+      logger.info('Cleaning up', {category: 'sync.main'});
+
       this.cleanup(cb);
     },
     (cb) => {
+      logger.info('Populate ignore db', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       this.populateIgnoreDb(cb);
     },
     (cb) => {
+      logger.info('Getting delta', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
+
       delta.getDelta('/', lastCursor.get(), (err, cursor) => {
         newCursor = cursor;
         cb(err);
       });
     },
     (cb) => {
+      logger.info('Applying error queue', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       queueErrorDb.findAll((err, errors) => {
@@ -122,6 +134,8 @@ SyncFactory.prototype.run = function(callback) {
       });
     },
     (cb) => {
+      logger.info('Procesing directory changes', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       this.emit('transfer-start');
@@ -130,6 +144,8 @@ SyncFactory.prototype.run = function(callback) {
       });
     },
     (cb) => {
+      logger.info('Processing file changes', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       this.processFileChanges((err, results) => {
@@ -137,6 +153,8 @@ SyncFactory.prototype.run = function(callback) {
       });
     },
     (cb) => {
+      logger.info('Processing removes', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       this.processRemoves((err, results) => {
@@ -144,6 +162,8 @@ SyncFactory.prototype.run = function(callback) {
       });
     },
     (cb) => {
+      logger.info('Processing action queue', {category: 'sync.main', stopped: this.stopped});
+
       if(this.stopped) return cb(null);
 
       this.actionQueue.process(err => {
@@ -152,6 +172,8 @@ SyncFactory.prototype.run = function(callback) {
       });
     }
   ], (err, results) => {
+    logger.info('Finalizing sync', {category: 'sync.main', stopped: this.stopped});
+
     if(!this.stopped && newCursor !== undefined) lastCursor.set(newCursor);
 
     var finalizeSync = () => {
@@ -498,21 +520,25 @@ SyncFactory.prototype.connectDbs = function(callback) {
 
   async.parallel([
     (cb) => {
+      logger.debug('Connecting syncDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       syncDb.connect(instanceDir, cb);
     },
     (cb) => {
+      logger.debug('Connecting ignoreDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       ignoreDb.connect(instanceDir, cb);
     },
     (cb) => {
+      logger.debug('Connecting queueErrorDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       queueErrorDb.connect(instanceDir, cb);
     },
     (cb) => {
+      logger.debug('Connecting transferDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       transferDb.connect(instanceDir, cb);
