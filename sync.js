@@ -178,6 +178,8 @@ SyncFactory.prototype.run = function(callback) {
 
     var finalizeSync = () => {
       syncEvents.destroy();
+
+      logger.info('Cleaning up', {category: 'sync.main', stopped: this.stopped});
       this.cleanup((cleanupErr) => {
         if(err) return callback(err);
         if(cleanupErr) return callback(cleanupErr);
@@ -195,9 +197,11 @@ SyncFactory.prototype.cleanup = function(callback) {
     (cb) => {
       if(syncDb.isConnected() === false) return cb(null);
 
+      logger.info('Cleaning database', {category: 'sync.main.cleanup', stopped: this.stopped});
       this.cleanDatabase(cb);
     },
     (cb) => {
+      logger.info('Running garbage collector', {category: 'sync.main.cleanup', stopped: this.stopped});
       garbageCollector.run(cb);
     }
   ], callback);
