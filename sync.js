@@ -624,7 +624,7 @@ SyncFactory.prototype.applyQueueError = function(error, callback) {
     }
 
     function createNodeByError(origin, errorNode, task, node, callback) {
-      var actionValue = errorNode.remoteActions.create;
+      var actionValue = errorNode[origin+'Actions'].create;
       actionValue.actionInitialized = task.created;
 
       addNodeAction(node, origin, {key: 'create', value: actionValue}, (err) => {
