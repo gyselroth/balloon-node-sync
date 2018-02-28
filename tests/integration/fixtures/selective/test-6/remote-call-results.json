@@ -1,0 +1,3 @@
+[
+  {"identifier": {"action": "getAttributesByIds", "id": "2", "attributes": [ "name", "parent", "path", "id"]}, "result": [{"id": "2", "name": "b", "parent": "", "path": "/b"}]}
+]

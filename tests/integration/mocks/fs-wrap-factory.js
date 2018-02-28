@@ -173,6 +173,15 @@ module.exports = function(pathFixtures) {
       removeNode(node);
     },
 
+    unlink: function(filename, callback) {
+      try {
+        this.unlinkSync(filename);
+        callback(null);
+      } catch(err) {
+        callback(err);
+      }
+    },
+
     rmdirSync: function(dirPath) {
       if(!this.existsSync(dirPath)) {
         var err = new Error('no such file or directory, rmdir \'' + dirPath + '\'');
@@ -198,6 +207,15 @@ module.exports = function(pathFixtures) {
       var parent = utility.getParentFromPath(dirPath);
       var node = findNodeByName(localFiles[parent], name);
       removeNode(node);
+    },
+
+    rmdir: function(dirPath, callback) {
+      try {
+        this.rmdirSync(dirPath);
+        callback(null);
+      } catch(err) {
+        callback(err);
+      }
     },
 
     lstatSync: function(filename) {

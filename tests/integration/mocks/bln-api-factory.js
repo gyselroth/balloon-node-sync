@@ -27,7 +27,7 @@ module.exports = function(pathFixtures) {
       return true;
     });
 
-    callResults.splice(foundCallResultIndex, 1);
+    if(foundCallResultIndex) callResults.splice(foundCallResultIndex, 1);
     return foundCallResult;
   }
 
@@ -85,7 +85,18 @@ module.exports = function(pathFixtures) {
         attributes = [];
       }
 
-      return callback(null, []);
+      var identifier = {action: 'getAttributesByIds', id, attributes};
+
+      var foundCallResult = findCallResult(identifier);
+      var err = null;
+      var result = [];
+
+      if(foundCallResult) {
+        err = foundCallResult.err;
+        result = foundCallResult.result;
+      }
+
+      return callback(null, result);
     },
 
     renameNode: function(node, callback) {

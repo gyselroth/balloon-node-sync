@@ -16,6 +16,7 @@ var lastCursor = require('./lib/last-cursor.js');
 var ignoreDb = require('./lib/ignore-db.js');
 var logger = require('./lib/logger.js');
 var queueErrorDb = require('./lib/queue/queue-error-db.js');
+var selective = require('./lib/selective.js');
 var syncDb = require('./lib/sync-db.js');
 var syncEvents = require('./lib/sync-events.js')();
 var transferDb = require('./lib/transfer-db.js');
@@ -49,6 +50,28 @@ module.exports = function($config, $logger) {
 };
 
 SyncFactory.prototype.blnApi = blnApi;
+
+SyncFactory.prototype.updateSelectiveSync = function(newIgnoredIds) {
+  return new Promise((resolve, reject) => {
+    this.connectDbs({transferDb: true, queueErrorDb: true}, err => {
+      if(err) return reject(err);
+
+      selective.updateIgnoredNodes(newIgnoredIds, (err) => {
+        if(err) return reject(err);
+
+        resolve();
+      });
+    });
+  });
+}
+
+SyncFactory.prototype.getIgnoredRemoteIds = function(callback) {
+  this.connectDbs({transferDb: true, queueErrorDb: true, syncDb: true}, (err) => {
+    if(err) return callback(err);
+
+    selective.getIgnoredRemoteIds(callback);
+  });
+}
 
 SyncFactory.prototype.stop = function(forceQuit, callback) {
   if(!!(forceQuit && forceQuit.constructor && forceQuit.call && forceQuit.apply)) {
@@ -98,7 +121,7 @@ SyncFactory.prototype.run = function(callback) {
 
       if(this.stopped) return cb(null);
 
-      this.connectDbs(cb);
+      this.connectDbs({}, cb);
     },
     (cb) => {
       logger.info('Cleaning up', {category: 'sync.main'});
@@ -106,11 +129,11 @@ SyncFactory.prototype.run = function(callback) {
       this.cleanup(cb);
     },
     (cb) => {
-      logger.info('Populate ignore db', {category: 'sync.main', stopped: this.stopped});
+      logger.info('Update ignore db', {category: 'sync.main', stopped: this.stopped});
 
       if(this.stopped) return cb(null);
 
-      this.populateIgnoreDb(cb);
+      selective.updateIgnoreDb(cb);
     },
     (cb) => {
       logger.info('Getting delta', {category: 'sync.main', stopped: this.stopped});
@@ -206,16 +229,6 @@ SyncFactory.prototype.cleanup = function(callback) {
     }
   ], callback);
 },
-
-SyncFactory.prototype.populateIgnoreDb = function(callback) {
-  var ignoreNodes = config.get('ignoreNodes') || [];
-
-  blnApi.getAttributesByIds(ignoreNodes, ['path', 'id'], (err, nodes) => {
-    if(err) return callback(err);
-
-    ignoreDb.insertNodes(nodes, callback);
-  });
-}
 
 SyncFactory.prototype.checkConfigDirAccess = function(callback) {
   var instanceDirPath = config.get('instanceDir');
@@ -519,29 +532,37 @@ SyncFactory.prototype.cleanDatabase = function(callback) {
   }, callback);
 }
 
-SyncFactory.prototype.connectDbs = function(callback) {
+SyncFactory.prototype.connectDbs = function(excludeDbs, callback) {
   var instanceDir = config.get('instanceDir');
 
   async.parallel([
     (cb) => {
+      if(excludeDbs.syncDb) return cb(null);
+
       logger.debug('Connecting syncDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       syncDb.connect(instanceDir, cb);
     },
     (cb) => {
+      if(excludeDbs.ignoreDb) return cb(null);
+
       logger.debug('Connecting ignoreDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       ignoreDb.connect(instanceDir, cb);
     },
     (cb) => {
+      if(excludeDbs.queueErrorDb) return cb(null);
+
       logger.debug('Connecting queueErrorDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 
       queueErrorDb.connect(instanceDir, cb);
     },
     (cb) => {
+      if(excludeDbs.transferDb) return cb(null);
+
       logger.debug('Connecting transferDb', {category: 'sync.main', stopped: this.stopped});
       if(this.stopped) return cb(null);
 

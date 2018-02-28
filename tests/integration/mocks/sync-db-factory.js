@@ -18,8 +18,16 @@ module.exports = function(pathFixtures) {
       return true;
     },
 
+    getCollectionPath: function(dbPath) {
+      return path.join(pathFixtures, 'local-synced.json');
+    },
+
+    collectionExists: function(dbPath) {
+      return true;
+    },
+
     connect: function(dbPath, callback) {
-      var actualDb = require(path.join(pathFixtures, 'local-synced.json'));
+      var actualDb = require(this.getCollectionPath(dbPath));
       nextAutoIncrement = actualDb.length;
 
       if(fs.existsSync(databasePath) === false) {
