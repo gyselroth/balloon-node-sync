@@ -1,0 +1,4 @@
+{
+  "#": {"id":"#","children":["2"]},
+  "2": {"id":"2","path":"/b","state":{"selected":false,"undetermined":false},"origState":{"selected":true,"undetermined":false},"children":[]}
+}

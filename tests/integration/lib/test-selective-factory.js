@@ -37,10 +37,10 @@ module.exports = function(test) {
     var logger = new loggerFactory(config);
     var sync = new syncFactory(config, logger);
 
-    var newIgnoredIds = require(path.join(pathFixtures, 'newIgnoredIds.json'));
+    var difference = require(path.join(pathFixtures, 'difference.json'));
 
 
-    sync.updateSelectiveSync(newIgnoredIds).then(function(result) {
+    sync.updateSelectiveSync(difference).then(function(result) {
       var expectedFiles = require(path.join(pathFixtures, 'expected-local-fs.json'));
       var expectedDb = require(path.join(pathFixtures, 'expected-local-synced.json'));
       var actualFiles = mockController.registry.fsWrap.getFiles();
