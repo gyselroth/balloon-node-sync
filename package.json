@@ -6,7 +6,7 @@
   "copyright": "© 2017, gyselroth GmbH",
   "homepage": "https://www.gyselroth.com",
   "license": "MIT",
-  "main": "sync.js",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },

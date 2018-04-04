@@ -19,7 +19,7 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('chai').assert;
 
-var syncFactory = require('../../../sync.js');
+var syncFactory = require('../../../full-sync-factory.js');
 var syncDb = require('../../../lib/sync-db.js');
 var ignoreDb = require('../../../lib/ignore-db.js');
 
