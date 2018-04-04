@@ -98,6 +98,32 @@ describe('utility', function() {
     });
   });
 
+  describe('getPathFromFsPath', function(){
+    it('should remove ballonDir from given path', function() {
+      var result = utility.getPathFromFsPath('/Users/username/Balloon/a/b')
+
+      assert.equal(result, '/a/b');
+    });
+
+    it('should return / if path is ballonDir', function() {
+      var result = utility.getPathFromFsPath('/Users/username/Balloon')
+
+      assert.equal(result, '/');
+    });
+
+    it('should remove a trailing /', function() {
+      var result = utility.getPathFromFsPath('/Users/username/Balloon/a/')
+
+      assert.equal(result, '/a');
+    });
+
+    it('should remove a trailing / if it is ballonDir', function() {
+      var result = utility.getPathFromFsPath('/Users/username/Balloon/')
+
+      assert.equal(result, '/');
+    });
+  });
+
   describe('getParentFromPath', function() {
     it('should return the path with leading /', function() {
       var result = utility.getParentFromPath('a/b/c')
