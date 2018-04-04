@@ -6,7 +6,7 @@ var syncFactory = require('./sync.js');
 
 var homeDir = process.env[(/^win/.test(process.platform)) ? 'USERPROFILE' : 'HOME'];
 var configDir = path.join(homeDir, '.balloon');
-var configFile = path.join(configDir, 'config.json');
+var configFile = path.join( __dirname, 'config.json');
 
 var version = require('./package.json').version;
 

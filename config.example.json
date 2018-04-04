@@ -1,0 +1,14 @@
+{
+  "configFile":"/Users/username/.balloon/instance-1/config-dev.json",
+  "instanceDir":"/Users/username/.balloon/instance-1",
+  "configDir":"/Users/username/.balloon",
+  "homeDir":"/Users/username",
+  "balloonDir":"/Users/username/Balloon",
+  "context":"development",
+  "blnUrl":"https://example.com",
+  "apiUrl":"https://example.com/api/v1/",
+  "username":"username",
+  "password":"password",
+  "loggedin":true,
+  "authMethod": "basic"
+}
