@@ -83,10 +83,14 @@ SyncFactory.prototype.stop = function(forceQuit, callback) {
   this.stopped = true;
 
   //Stop queue
-  if(this.actionQueue) this.actionQueue.stop(err => {
-    this.emit('transfer-end');
-    if(callback) callback(err);
-  });
+  if(this.actionQueue) {
+    this.actionQueue.stop(err => {
+      this.emit('transfer-end');
+      if(callback) callback(err);
+    });
+  } else {
+    if(callback) callback(null);
+  }
 
   syncEvents.emit(syncEvents.STOP, forceQuit);
 }
