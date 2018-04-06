@@ -83,16 +83,22 @@ SyncFactory.prototype.stop = function(forceQuit, callback) {
   this.stopped = true;
 
   //Stop queue
-  if(this.actionQueue) this.actionQueue.stop(err => {
-    this.emit('transfer-end');
-    if(callback) callback(err);
-  });
+  if(this.actionQueue) {
+    this.actionQueue.stop(err => {
+      this.emit('transfer-end');
+      if(callback) callback(err);
+    });
+  } else {
+    if(callback) callback(null);
+  }
 
   syncEvents.emit(syncEvents.STOP, forceQuit);
 }
 
 SyncFactory.prototype.start = function(callback) {
   logger.info('Checking config dir access', {category: 'sync.main'});
+
+  if(this.stopped) return callback(null);
 
   this.checkConfigDirAccess((err) => {
     if(err) {
@@ -103,6 +109,8 @@ SyncFactory.prototype.start = function(callback) {
       logger.error('Can\'t start sync config access check not successfull', {category: 'sync.main', err});
       return callback(err);
     }
+
+    if(this.stopped) return callback(null);
 
     this.run(callback);
   });
@@ -125,6 +133,8 @@ SyncFactory.prototype.run = function(callback) {
     },
     (cb) => {
       logger.info('Cleaning up', {category: 'sync.main'});
+
+      if(this.stopped) return cb(null);
 
       this.cleanup(cb);
     },
@@ -199,19 +209,22 @@ SyncFactory.prototype.run = function(callback) {
 
     if(!this.stopped && newCursor !== undefined) lastCursor.set(newCursor);
 
-    var finalizeSync = () => {
+    if(this.stopped) {
       syncEvents.destroy();
 
-      logger.info('Cleaning up', {category: 'sync.main', stopped: this.stopped});
-      this.cleanup((cleanupErr) => {
-        if(err) return callback(err);
-        if(cleanupErr) return callback(cleanupErr);
-
-        callback(null, results);
-      });
+      return callback(null);
     }
 
-    return finalizeSync();
+    logger.info('Cleaning up', {category: 'sync.main', stopped: this.stopped});
+
+    this.cleanup((cleanupErr) => {
+      syncEvents.destroy();
+
+      if(err) return callback(err);
+      if(cleanupErr) return callback(cleanupErr);
+
+      callback(null, results);
+    });
   });
 }
 
