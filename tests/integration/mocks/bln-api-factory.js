@@ -27,7 +27,7 @@ module.exports = function(pathFixtures) {
       return true;
     });
 
-    if(foundCallResultIndex) callResults.splice(foundCallResultIndex, 1);
+    if(foundCallResultIndex !== undefined) callResults.splice(foundCallResultIndex, 1);
     return foundCallResult;
   }
 
