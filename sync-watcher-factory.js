@@ -4,9 +4,11 @@ const EventEmitter = require('events').EventEmitter;
 const async = require('async');
 
 const config = require('./lib/config.js');
+const ignoreDb = require('./lib/ignore-db.js');
 const logger = require('./lib/logger.js');
 const LocalWatcherFactory = require('./lib/watcher/local-factory.js');
 const RemoteWatcherFactory = require('./lib/watcher/remote-factory.js');
+const selective = require('./lib/selective.js');
 
 function SyncFactory($config, $logger) {
   logger.info('initializing watcher', {category: 'sync.watcher'});
@@ -34,11 +36,25 @@ module.exports = function($config, $logger) {
 };
 
 SyncFactory.prototype.start = function() {
-  this.localWatcher.once('started', () => {
+  async.series([
+    (cb) => {
+      logger.debug('Connecting ignoreDb', {category: 'sync.watcher'});
+
+      ignoreDb.connect(config.get('instanceDir'), cb);
+    },
+    (cb) => {
+      logger.debug('Update ignore db', {category: 'sync.watcher'});
+
+      selective.updateIgnoreDb(cb);
+    },
+    (cb) => {
+      this.localWatcher.once('started', cb);
+
+      this.localWatcher.start();
+    }
+  ], err => {
     this.emit('started');
   });
-
-  this.localWatcher.start();
 }
 
 SyncFactory.prototype.stop = function() {
@@ -123,9 +139,11 @@ SyncFactory.prototype._initializeRemoteWatcher = function() {
   this.remoteWatcher.on('changes', (changes) => {
     logger.debug('remote watcher emmited changes', {category: 'sync.watcher', changes, paused: this.paused})
 
-    if(this.paused === false) {
-      this.emit('changed', 'remote');
-    }
+    selective.updateIgnoreDb(err => {
+      if(this.paused === false) {
+        this.emit('changed', 'remote');
+      }
+    });
   });
 
   this.remoteWatcher.on('error', (err) => {
