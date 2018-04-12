@@ -3,7 +3,7 @@
   "version": "0.2.0-alpha.1",
   "description": "Sync client for balloon",
   "author": "gyselroth GmbH  <maint@gyselroth.com>",
-  "copyright": "© 2017, gyselroth GmbH",
+  "copyright": "© 2018, gyselroth GmbH",
   "homepage": "https://www.gyselroth.com",
   "license": "MIT",
   "main": "index.js",
