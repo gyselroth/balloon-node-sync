@@ -1,0 +1,4 @@
+[
+  {"name":"a","ino":"1","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"1","remoteParent":"","localParent":null,"_id":"0"},
+  {"name":"b","ino":null,"size":0,"mtime":null,"ctime":null,"parent":"/","directory":true,"remoteId":"2","remoteParent":"","localParent":null,"downloadOriginal": true,"_id":"1"}
+]

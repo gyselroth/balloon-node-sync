@@ -1,12 +1,12 @@
 {
   "name": "@gyselroth/balloon-node-sync",
-  "version": "0.0.33",
+  "version": "0.1.0-beta2",
   "description": "Sync client for balloon",
   "author": "gyselroth GmbH  <maint@gyselroth.com>",
-  "copyright": "© 2017, gyselroth GmbH",
+  "copyright": "© 2018, gyselroth GmbH",
   "homepage": "https://www.gyselroth.com",
   "license": "MIT",
-  "main": "sync.js",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
@@ -40,10 +40,10 @@
     "fs-extra": "^1.0.0",
     "md5-file": "^3.1.1",
     "nedb": "^1.8.0",
-    "request": "^2.79.0",
+    "request": "^2.85.0",
     "unorm": "^1.4.1",
     "uuid4": "^1.0.0",
-    "winston": "^2.3.1"
+    "winston": "^2.4.1"
   },
   "optionalDependencies": {
     "@gyselroth/windows-fsstat": "^0.0.6"

@@ -1,0 +1,6 @@
+[
+  {"name":"a","ino":"1","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"1","remoteParent":"","localParent":null,"_id":"0"},
+  {"name":"b","ino":"2","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"2","remoteParent":"","localParent":null,"_id":"1"},
+  {"name":"c","ino":"3","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/b","directory":true,"remoteId":"3","remoteParent":"2","localParent":"1","_id":"2"},
+  {"name":"a.txt","ino":"4","size":4,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/b","directory":false,"remoteId":"4","remoteParent":"2","localParent":"1","_id":"3"}
+]

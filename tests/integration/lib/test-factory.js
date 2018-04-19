@@ -19,8 +19,9 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('chai').assert;
 
-var syncFactory = require('../../../sync.js');
+var syncFactory = require('../../../full-sync-factory.js');
 var syncDb = require('../../../lib/sync-db.js');
+var ignoreDb = require('../../../lib/ignore-db.js');
 
 var loggerFactory = require('./logger-factory.js')
 
@@ -46,6 +47,8 @@ module.exports = function(test) {
       var actualApiErrors = [];
       var expectedRemoteCalls = [];
       var actualRemoteCalls = [];
+      var actualIgnoreDb = [];
+      var expectedIgnoreDb = [];
 
       var pathExpectedRemoteCalls = path.join(pathFixtures, 'expected-remote-calls.json');
       if(fs.existsSync(pathExpectedRemoteCalls)) {
@@ -67,6 +70,18 @@ module.exports = function(test) {
           }
         },
         (cb) => {
+          var pathExpectedIgnoreDb = path.join(pathFixtures, 'expected-local-ignore-db.json');
+          if(fs.existsSync(pathExpectedIgnoreDb)) {
+            expectedIgnoreDb = require(pathExpectedIgnoreDb);
+            mockController.registry.ignoreDb.getNodeList((err, nodes) => {
+              actualIgnoreDb = nodes;
+              cb(null);
+            });
+          } else {
+            cb(null);
+          }
+        },
+        (cb) => {
           mockController.registry.syncDb.getNodeList((err, nodes) => {
             actualDb = nodes;
             cb(null);
@@ -81,6 +96,7 @@ module.exports = function(test) {
         assert.deepEqual(actualDb, expectedDb);
         assert.deepEqual(actualRemoteCalls, expectedRemoteCalls);
         assert.deepEqual(actualApiErrors, expectedApiErrors);
+        assert.deepEqual(actualIgnoreDb, expectedIgnoreDb);
 
         done();
       });
