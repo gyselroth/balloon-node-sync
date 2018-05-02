@@ -148,6 +148,7 @@ SyncFactory.prototype._initializeRemoteWatcher = function() {
 
   this.remoteWatcher.on('error', (err) => {
     // TODO pixtron - handle errors
+    logger.error('Remote watcher had error', {category: 'watcher', err})
     throw err;
   });
 }
