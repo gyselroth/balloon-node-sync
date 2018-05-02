@@ -626,6 +626,11 @@ SyncFactory.prototype.applyQueueError = function(error, callback) {
           if(err) return callback(err);
 
           if(!syncedNode) {
+            if(errorOrigin === 'local') {
+              //if file not anymore localy present we can ignore the node (not anymore necessary to upload node's content)
+              return removeError(error._id, callback)
+            }
+
             var remoteId = getRemoteId(errorNode);
             var query = {$or: [
               {remoteId: remoteId},

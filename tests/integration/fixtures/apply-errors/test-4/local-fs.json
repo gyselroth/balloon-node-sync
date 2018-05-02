@@ -1,0 +1,5 @@
+{
+  "/": [
+    {"name": "a-renamed.txt", "stat": {"ino": "1", "size": 6, "mtime": "2017-01-19T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/", "directory": false}
+  ]
+}
