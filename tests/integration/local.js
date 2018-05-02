@@ -186,7 +186,12 @@ describe('local', function() {
     {
       'title': 'Deletes directory and renames other directory to path of deleted directory',
       'fixtures': 'local/delete-dir-rename-dir'
-    }
+    },
+    {
+      'title': 'Moves a file out of its parent and deletes parent remotely',
+      'fixtures': 'local/move-file-delete-dir'
+    },
+
   ];
 
   tests.forEach(function(test) {
