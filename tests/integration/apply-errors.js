@@ -14,6 +14,18 @@ describe('apply-errors', function() {
     {
       'title': 'Download is not rescheduled if node delta contains a newer version',
       'fixtures': 'apply-errors/test-2'
+    },
+    {
+      'title': 'Upload with ENOENT is rescheduled',
+      'fixtures': 'apply-errors/test-3'
+    },
+    {
+      'title': 'Upload with ENOENT is rescheduled if even if node has been renamed meanwhile',
+      'fixtures': 'apply-errors/test-4'
+    },
+    {
+      'title': 'Upload with ENOENT is rescheduled if even if node has been renamed and got a new ino meanwhile',
+      'fixtures': 'apply-errors/test-5'
     }
   ];
 
