@@ -525,24 +525,16 @@ SyncFactory.prototype.validateActions = function(node) {
 }
 
 SyncFactory.prototype.cleanDatabase = function(callback) {
-  syncDb.walkTree('/', true, false, (node, parentNode, cb) => {
-    if(!node.remoteId) {
-      //node which was created from remote, but not downloaded
-      return syncDb.remove(node._id, cb);
+  async.series([
+    (cb) => {
+      // remove all nodes, created from remote, but not downloaded
+      syncDb.getDb().remove({$where: function() {return !this.remoteId}}, {multi: true}, cb);
+    },
+    (cb) => {
+      // remove all local and remote actions
+      syncDb.getDb().update({}, {$unset: {localActions: true, remoteActions: true}}, {multi: true}, cb);
     }
-
-    try {
-      node.localParent = parentNode._id;
-      node.remoteParent = parentNode.remoteId;
-
-      delete node.localActions;
-      delete node.remoteActions;
-
-      return syncDb.update(node._id, node, cb);
-    } catch(err) {
-      cb(err);
-    }
-  }, callback);
+  ], callback);
 }
 
 SyncFactory.prototype.connectDbs = function(excludeDbs, callback) {
