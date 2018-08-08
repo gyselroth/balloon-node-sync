@@ -65,6 +65,7 @@ SyncFactory.prototype.stop = function() {
   async.parallel([
     (cb) => {
       this.localWatcher.once('stoped', () => {
+        logger.info('local watcher stoped', {category: 'sync.watcher', paused: this.paused});
         this.localChangesCached = false;
         cb(null);
       });
@@ -73,6 +74,7 @@ SyncFactory.prototype.stop = function() {
     },
     (cb) => {
       this.remoteWatcher.once('stoped', () => {
+        logger.info('remote watcher stoped', {category: 'sync.watcher', paused: this.paused});
         cb(null);
       });
 
