@@ -476,6 +476,7 @@ SyncFactory.prototype.resolveDirectoryRemoveConflicts = function(node, callback)
               syncDb.findByPath(path, {$not: {_id: node._id}}, (err, conflictingNode) => {
                 if(err || !conflictingNode) return cb(err);
 
+                logger.debug('Renaming conflict file', {category: 'sync.main', parent: conflictingNode.parent, name: conflictingNode.name, conflictingNode});
                 // TODO pixtron - this is basicaly renameConflictNode from lib/delta/delta.js, use this method as it has better error handling
                 var newLocalName = utility.renameConflictNode(conflictingNode.parent, conflictingNode.name);
 
