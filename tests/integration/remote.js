@@ -118,6 +118,10 @@ describe('remote', function() {
     {
       'title': 'Deletes directory and renames other directory to path of deleted directory',
       'fixtures': 'remote/delete-dir-rename-dir'
+    },
+    {
+      'title': 'Moves existing dir into non existing directory',
+      'fixtures': 'remote/move-dir-to-not-existing-parent'
     }
   ];
 
