@@ -114,6 +114,10 @@ describe('conflicts', function() {
       'title': 'remote rename and local rename of two different directories with the same target are resolved in a readonly share',
       'fixtures': 'conflicts/readonly-share-1'
     },
+    {
+      'title': 'download original collection, which has been renamed remotely in the meanwhile',
+      'fixtures': 'conflicts/dir-23'
+    },
 
 
 

@@ -193,7 +193,13 @@ module.exports = function(pathFixtures) {
 
     nodeDelta: function(params, callback) {
       var cursor = params.cursor;
-      var deltaResult = require(path.join(pathFixtures, 'remote-delta-' + cursor + '.json'));
+      var deltaNameParts = ['remote-delta'];
+
+      if(params.id) deltaNameParts.push('id' + params.id);
+
+      if(cursor) deltaNameParts.push(cursor);
+
+      var deltaResult = require(path.join(pathFixtures, deltaNameParts.join('-') + '.json'));
 
       callback(null, deltaResult);
     }

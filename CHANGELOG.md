@@ -5,3 +5,4 @@
 * CORE [Fix] Catch ENOENT after creating a collection #14
 * CORE [Fix] Avoid Uncaught ReferenceError: task is not defined #16
 * CORE [Fix] Wrong renamemove detected, after applying selective sync settings #15
+* CORE [Fix] Race condition in delta #17
