@@ -53,6 +53,13 @@ SyncFactory.prototype.start = function() {
       this.localWatcher.start();
     }
   ], err => {
+    if(err) {
+      logger.error('Watcher not started due to error', {category: 'watcher', err});
+
+      this.emit('error', err);
+      return;
+    }
+
     logger.debug('watcher started', {category: 'sync.watcher'});
 
     this.emit('started');
