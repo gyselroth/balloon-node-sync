@@ -8,3 +8,4 @@
 * CORE [Fix] Race condition in delta #17
 * CORE [Fix] Error handling for file downloads, if node is not found in db #18
 * CORE [Change] emit watcher startup gyselroth/balloon-client-desktop#130
+* CORE [Change] improve rename of conflict files #19

@@ -183,7 +183,9 @@ describe('utility', function() {
         var presentFiles = [
           '/Users/username/Balloon/b-conflict-username-20.01.2017-00.00.txt',
           '/Users/username/Balloon/c-conflict-username-20.01.2017-00.00.txt',
-          '/Users/username/Balloon/c-conflict-username-20.01.2017-00.00 (1).txt'
+          '/Users/username/Balloon/c-conflict-username-20.01.2017-00.00 (1).txt',
+          '/Users/username/Balloon/d-conflict-username-18.01.2017-00.00.txt',
+          '/Users/username/Balloon/e-conflict-otheruser-20.01.2017-00.00.txt',
         ]
 
         return presentFiles.includes(filename);
@@ -196,14 +198,34 @@ describe('utility', function() {
       assert.equal(result, 'a-conflict-username-20.01.2017-00.00.txt');
     });
 
+    it('should remove and existing conflict postfix', function() {
+      var result = utility.renameConflictNode('/', 'd-conflict-username-18.01.2017-00.00.txt');
+
+      assert.equal(result, 'd-conflict-username-20.01.2017-00.00.txt');
+    });
+
+    it('should remove and existing conflict postfix from another user', function() {
+      var result = utility.renameConflictNode('/', 'e-conflict-otheruser-20.01.2017-00.00.txt');
+
+      assert.equal(result, 'e-conflict-username-20.01.2017-00.00.txt');
+    });
+
     it('should append add a version number if file already exists', function() {
       var result = utility.renameConflictNode('/', 'b.txt');
+
+      assert.equal(result, 'b-conflict-username-20.01.2017-00.00 (1).txt');
+
+      var result = utility.renameConflictNode('/', 'b-conflict-username-20.01.2017-00.00.txt');
 
       assert.equal(result, 'b-conflict-username-20.01.2017-00.00 (1).txt');
     });
 
     it('should append add increase version number if file already exists', function() {
       var result = utility.renameConflictNode('/', 'c.txt');
+
+      assert.equal(result, 'c-conflict-username-20.01.2017-00.00 (2).txt');
+
+      var result = utility.renameConflictNode('/', 'c-conflict-username-20.01.2017-00.00 (1).txt');
 
       assert.equal(result, 'c-conflict-username-20.01.2017-00.00 (2).txt');
     });
