@@ -1,3 +1,9 @@
+## 0.2.6
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: 
+
+* CORE [FIX] Avoid loosing remote history #20
+
 ## 0.2.5
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Fri Novemer 02 12:26:33 CET 2018

@@ -528,8 +528,8 @@ SyncFactory.prototype.validateActions = function(node) {
 SyncFactory.prototype.cleanDatabase = function(callback) {
   async.series([
     (cb) => {
-      // remove all nodes, created from remote, but not downloaded
-      syncDb.getDb().remove({$where: function() {return !this.remoteId}}, {multi: true}, cb);
+      // remove all nodes, created from remote but not downloaded or created from local but not uploaded
+      syncDb.getDb().remove({$where: function() {return !this.remoteId || (!this.ino && !this.downloadOriginal)}}, {multi: true}, cb);
     },
     (cb) => {
       // remove all local and remote actions
