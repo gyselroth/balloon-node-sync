@@ -1,5 +1,6 @@
 ## 0.2.5
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Fri Novemer 02 12:26:33 CET 2018
 
 * CORE [Fix] Avoid leaking authorization header to logs #13
 * CORE [Fix] Catch ENOENT after creating a collection #14

@@ -1,13 +1,16 @@
 dist: trusty
 sudo: false
-
 language: node_js
-node_js: "8"
-
+node_js: '8'
 notifications:
   email: false
-
 install:
-  - npm install
-
+- npm install
 script: npm run test
+deploy:
+  on:
+    tags: true
+  provider: npm
+  email: sahli@gyselroth.com
+  api_key:
+    secure: OTRdZBAEx4CYJrlXEiVk0mJ6XPH2i+VnSJVoOUj8UGhR928C5N0iac1S0hem2oqXvWfbRAdvUCstjSPvJajZwzBm7q8YyLIoU2lBnp41ISrUEeA0niCW3X6v8oKDEj1Uitb5hIFXMyTMcKD4+XMM4S2mUhANoXkaKxI5rZ2iC975dsHAg3AdJIodbV45tBseA8SWQaGIqQq97WG3iAcGdOsbjCMBbStpPxuqYzxVz12S0049XSTNIu+I2R1rDWSAUSMB2t3MZHUbhJtp1iMfTYdX/RneyqU/qm/8YmKECK+LGPlpGyoHMjtpVOIBto5sPnjYbiJLR5U3VDSC7EU0JHELla4C9p8H7gROQvDHh7nYID6552GRSY4ZSO/xAFmqScXwSuxZ6zAk+QvN0w0Y0TUyvG8SY6m24yboIKa00INmOLu0z5GKIcuvD1u4anqzjOJ4mzvs9ZNuPJcEAX6ONfqn77WcpOtvv86dPc2+MAUITo7AmPXG8NHlVS9CvuzQAS/VMRcfWg86lzTOGPlb8fvvLeujlna53XOjjJtD64oGtKkbrg1UECnl7pJEXSC7p4WbL+ArGPViKHa3O71WJGCO6ZP0QeJ7dGFos5lFZwnlgItYOt4ymKNbESmGPf9OjXdOWRndZIBFc/l2lyF/E/cWti92K8QpjG6lg8rl92E=
