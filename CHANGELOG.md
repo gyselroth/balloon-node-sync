@@ -2,11 +2,11 @@
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Fri Novemer 02 12:26:33 CET 2018
 
-* CORE [Fix] Avoid leaking authorization header to logs #13
-* CORE [Fix] Catch ENOENT after creating a collection #14
-* CORE [Fix] Avoid Uncaught ReferenceError: task is not defined #16
-* CORE [Fix] Wrong renamemove detected, after applying selective sync settings #15
-* CORE [Fix] Race condition in delta #17
-* CORE [Fix] Error handling for file downloads, if node is not found in db #18
-* CORE [Change] emit watcher startup gyselroth/balloon-client-desktop#130
-* CORE [Change] improve rename of conflict files #19
+* CORE [FIX] Avoid leaking authorization header to logs #13
+* CORE [FIX] Catch ENOENT after creating a collection #14
+* CORE [FIX] Avoid Uncaught ReferenceError: task is not defined #16
+* CORE [FIX] Wrong renamemove detected, after applying selective sync settings #15
+* CORE [FIX] Race condition in delta #17
+* CORE [FIX] Error handling for file downloads, if node is not found in db #18
+* CORE [CHANGE] emit watcher startup gyselroth/balloon-client-desktop#130
+* CORE [CHANGE] improve rename of conflict files #19
