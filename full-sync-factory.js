@@ -123,6 +123,14 @@ SyncFactory.prototype.run = function(callback) {
 
   logger.info('Starting Sync', {category: 'sync.main', cursor: lastCursor.get()});
 
+  syncEvents.on(syncEvents.TRANSFER_QUEUE_EVENT, (task) => {
+    this.emit('transfer-task', task);
+  });
+
+  syncEvents.on(syncEvents.TRANSFER_QUEUE_PROGRESS, (task) => {
+    this.emit('transfer-progress', task);
+  });
+
   async.series([
     (cb) => {
       logger.info('Connecting databases', {category: 'sync.main', stopped: this.stopped});
