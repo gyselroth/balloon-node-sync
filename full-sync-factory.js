@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require('original-fs');
 var path = require('path');
 var inherits = require('util').inherits;
 var EventEmitter = require('events').EventEmitter;
