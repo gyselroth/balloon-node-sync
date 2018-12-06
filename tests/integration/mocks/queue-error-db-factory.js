@@ -101,6 +101,7 @@ module.exports = function(pathFixtures) {
             if(a._id !== b._id) return a._id < b._id ? -1 : 1;
             return 0;
           }).map((error) => {
+            if(error.task.id) delete error.task.id;
             if(error.task.created) error.task.created = error.task.created.toJSON();
             if(error.task.node) {
               if(error.task.node.mtime) error.task.node.mtime = error.task.node.mtime.toJSON();

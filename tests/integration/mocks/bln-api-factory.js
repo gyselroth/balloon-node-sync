@@ -3,6 +3,7 @@ var path = require('path');
 
 var fsWrap = require('../../../lib/fs-wrap.js');
 var utility = require('../../../lib/utility.js');
+var BlnApiProgress = require('../../../lib/bln-api-progress.js');
 var md5 = require('md5');
 
 module.exports = function(pathFixtures) {
@@ -145,6 +146,7 @@ module.exports = function(pathFixtures) {
     },
 
     uploadFile: function(node, callback) {
+      var progress = new BlnApiProgress();
       try {
         fsWrap.createReadStream(utility.joinPath(node.parent, node.name));
       } catch(err) {
@@ -168,9 +170,12 @@ module.exports = function(pathFixtures) {
       }
 
       callback(err, result);
+      return progress;
     },
 
     downloadFile: function(remoteId, version, node, callback) {
+      var progress = new BlnApiProgress();
+
       try {
         fsWrap.createWriteStream(utility.joinPath(node.parent, node.name));
       } catch(err) {
@@ -189,6 +194,7 @@ module.exports = function(pathFixtures) {
       }
 
       callback(err, result);
+      return progress;
     },
 
     nodeDelta: function(params, callback) {

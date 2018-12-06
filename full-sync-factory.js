@@ -1,4 +1,4 @@
-var fs = require('original-fs');
+var fs = require('./lib/fs.js');
 var path = require('path');
 var inherits = require('util').inherits;
 var EventEmitter = require('events').EventEmitter;
@@ -123,10 +123,12 @@ SyncFactory.prototype.run = function(callback) {
 
   logger.info('Starting Sync', {category: 'sync.main', cursor: lastCursor.get()});
 
+  syncEvents.removeAllListeners(syncEvents.TRANSFER_QUEUE_EVENT);
   syncEvents.on(syncEvents.TRANSFER_QUEUE_EVENT, (task) => {
     this.emit('transfer-task', task);
   });
 
+  syncEvents.removeAllListeners(syncEvents.TRANSFER_QUEUE_PROGRESS);
   syncEvents.on(syncEvents.TRANSFER_QUEUE_PROGRESS, (task) => {
     this.emit('transfer-progress', task);
   });

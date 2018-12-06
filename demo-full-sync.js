@@ -1,4 +1,4 @@
-var fs = require('original-fs');
+var fs = require('fs');
 var path = require('path');
 
 var loggerFactory = require('./lib/logger-factory.js');
