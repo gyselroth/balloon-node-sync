@@ -34,17 +34,17 @@
     "sinon": "^1.17.6"
   },
   "dependencies": {
-    "async": "^2.4.1",
-    "dateformat": "^2.0.0",
+    "async": "^2.6.1",
+    "dateformat": "^3.0.3",
     "escape-string-regexp": "^1.0.5",
-    "fs-extra": "^1.0.0",
-    "md5-file": "^3.1.1",
+    "fs-extra": "^7.0.1",
+    "md5-file": "^4.0.0",
     "nedb": "^1.8.0",
-    "nsfw": "^1.1.1",
-    "request": "^2.85.0",
+    "nsfw": "^1.2.0",
+    "request": "^2.88.0",
     "unorm": "^1.4.1",
-    "uuid4": "^1.0.0",
-    "winston": "^2.4.1"
+    "uuid4": "^1.1.4",
+    "winston": "^2.4.4"
   },
   "optionalDependencies": {
     "@gyselroth/windows-fsstat": "^0.0.6"
