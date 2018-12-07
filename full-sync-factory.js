@@ -65,6 +65,20 @@ SyncFactory.prototype.updateSelectiveSync = function(newIgnoredIds) {
   });
 }
 
+SyncFactory.prototype.initializeIgnoreDb = function(nodes) {
+  return new Promise((resolve, reject) => {
+    this.connectDbs({transferDb: true, queueErrorDb: true, sybcDb: true}, err => {
+      if(err) return reject(err);
+
+      selective.initializeIgnoreDb(nodes, (err) => {
+        if(err) return reject(err);
+
+        resolve();
+      });
+    });
+  });
+}
+
 SyncFactory.prototype.getIgnoredRemoteIds = function(callback) {
   this.connectDbs({transferDb: true, queueErrorDb: true, syncDb: true}, (err) => {
     if(err) return callback(err);
