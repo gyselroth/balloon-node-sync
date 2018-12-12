@@ -1,8 +1,9 @@
-## 0.2.6
+## 0.3.0
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: 
 
 * CORE [FIX] Avoid loosing remote history #20
+
 
 ## 0.2.5
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
