@@ -13,6 +13,7 @@ var delta = require('./lib/delta/delta.js');
 var fsWrap = require('./lib/fs-wrap.js');
 var garbageCollector = require('./lib/garbage-collector.js');
 var lastCursor = require('./lib/last-cursor.js');
+var balloonDirIno = require('./lib/balloon-dir-ino.js');
 var ignoreDb = require('./lib/ignore-db.js');
 var logger = require('./lib/logger.js');
 var queueErrorDb = require('./lib/queue/queue-error-db.js');
@@ -113,6 +114,9 @@ SyncFactory.prototype.start = function(callback) {
   logger.info('Checking config dir access', {category: 'sync.main'});
 
   if(this.stopped) return callback(null);
+
+  var err = validateSyncState();
+  if(err !== null) return callback(err);
 
   this.checkConfigDirAccess((err) => {
     if(err) {
@@ -734,6 +738,71 @@ SyncFactory.prototype.find = function(query, callback) {
   syncDb.find(query, callback);
 }
 
+function validateSyncState() {
+  if(config.get('context') === 'test') return null;
+
+  if(!config.get('instanceDir')) {
+    return new BlnConfigError('instanceDir is not configured', 'E_BLN_CONFIG_INSTANCEDIR');
+  }
+
+  var pathDb = path.join(config.get('instanceDir'), 'db/nodes.db');
+  var pathCursor = path.join(config.get('instanceDir'), 'last-cursor');
+  var pathTemp = path.join(config.get('instanceDir'), 'temp');
+
+  if(!fs.existsSync(config.get('instanceDir'))) fs.mkdirSync(config.get('instanceDir'));
+  if(!fs.existsSync(pathTemp)) fs.mkdirSync(pathTemp);
+
+  var dbExists = fs.existsSync(pathDb);
+  var cursorExists = fs.existsSync(pathCursor);
+  var balloonDirInoStorage = balloonDirIno(config.get('instanceDir'));
+  var balloonDirInoFromStorage = balloonDirInoStorage.read();
+
+  try {
+    var currentBalloonDirIno = fs.lstatSync(config.get('balloonDir')).ino + '';
+  } catch(err) {
+    return new BlnConfigError('could not get stat for balloonDir', 'E_BLN_CONFIG_BALLOONDIR');
+  }
+
+  if(balloonDirInoFromStorage === undefined) {
+    if(dbExists) {
+      logger.info('Db exists, but not balloonDirIno. Deleteing db.', {category: 'sync.main'});
+      fs.unlinkSync(pathDb);
+    }
+    if(cursorExists) {
+      logger.info('last_cursor exists, but not balloonDirIno. Deleteing last_cursor.', {category: 'sync.main'});
+      fs.unlinkSync(pathCursor);
+    }
+
+    balloonDirInoStorage.write(currentBalloonDirIno);
+  } else if(currentBalloonDirIno === balloonDirInoFromStorage) {
+    if(dbExists ? !cursorExists : cursorExists) {
+      //sync can only run successfully when cursor and db both exist or both don't exists
+      //aka dbExists XOR lastCursorExists
+      if(dbExists) {
+        logger.info('db exists, but not last cursor. Deleteing db.', {category: 'sync.main'});
+        fs.unlinkSync(pathDb);
+      }
+      if(cursorExists) {
+        logger.info('last_cursor exists, but not sync db. Deleteing last_cursor.', {category: 'sync.main'});
+        fs.unlinkSync(pathCursor);
+      }
+    }
+  } else {
+    balloonDirInoStorage.write(currentBalloonDirIno);
+
+    if(dbExists) {
+      logger.info('Db exists, but balloonDirIno does not match. Deleteing db.', {category: 'sync.main'});
+      fs.unlinkSync(pathDb);
+    }
+    if(cursorExists) {
+      logger.info('last_cursor exists, but balloonDirIno does not match. Deleteing last_cursor.', {category: 'sync.main'});
+      fs.unlinkSync(pathCursor);
+    }
+  }
+
+  return null;
+}
+
 function validateConfiguration(config) {
   if(config.context === 'test') return null;
 
@@ -754,29 +823,6 @@ function validateConfiguration(config) {
     return new BlnConfigError('instanceDir is not set', 'E_BLN_CONFIG_CONFIGDIR');
   } else if(!config.apiUrl) {
     return new BlnConfigError('apiUrl is not set', 'E_BLN_CONFIG_APIURL');
-  } else {
-    var pathDb = path.join(config.instanceDir, 'db/nodes.db');
-    var pathCursor = path.join(config.instanceDir, 'last-cursor');
-
-    var dbExists = fs.existsSync(pathDb);
-    var cursorExists = fs.existsSync(pathCursor);
-
-    if(dbExists ? !cursorExists : cursorExists) {
-      //sync can only run successfully when cursor and db both exist or both don't exists
-      //aka dbExists XOR lastCursorExists
-      if(dbExists) {
-        logger.info('Sync: db exists, but not last cursor. Deleteing db.');
-        fs.unlinkSync(pathDb);
-      }
-      if(cursorExists) {
-        logger.info('Sync: last_cursor exists, but not last db. Deleteing last_cursor.');
-        fs.unlinkSync(pathCursor);
-      }
-    }
-
-    var pathTemp = path.join(config.instanceDir, 'temp');
-    if(!fs.existsSync(config.instanceDir)) fs.mkdirSync(config.instanceDir);
-    if(!fs.existsSync(pathTemp)) fs.mkdirSync(pathTemp);
   }
 
   return null;
