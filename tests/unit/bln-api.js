@@ -282,7 +282,7 @@ describe('blnApi', function() {
 
       blnApi.nodeDelta({cursor: 'a'}, sinon.spy());
 
-      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size'], cursor: 'a'});
+      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size', 'shared', 'reference'], cursor: 'a'});
     });
 
     it('should be possible to get delta without params set', function() {
@@ -290,7 +290,7 @@ describe('blnApi', function() {
 
       blnApi.nodeDelta(sinon.spy());
 
-      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size']});
+      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size', 'shared', 'reference']});
     });
 
     it('should set the correct params', function() {
@@ -298,7 +298,7 @@ describe('blnApi', function() {
 
       blnApi.nodeDelta({id: '12'}, sinon.spy());
 
-      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size'], id: '12'});
+      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size', 'shared', 'reference'], id: '12'});
     });
 
     it('should unset a undefined cursor', function() {
@@ -306,7 +306,7 @@ describe('blnApi', function() {
 
       blnApi.nodeDelta({cursor: undefined}, sinon.spy());
 
-      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size']});
+      blnApiRequest.sendRequest.should.have.been.calledWith('get', '/node/delta', {attributes: ['parent', 'hash', 'version', 'size', 'shared', 'reference']});
     });
   });
 
