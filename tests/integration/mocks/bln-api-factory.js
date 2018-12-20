@@ -208,6 +208,10 @@ module.exports = function(pathFixtures) {
       var deltaResult = require(path.join(pathFixtures, deltaNameParts.join('-') + '.json'));
 
       callback(null, deltaResult);
+    },
+
+    queryNodes: function(query, callback) {
+      return callback(null, []);
     }
   }
 

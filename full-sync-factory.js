@@ -22,6 +22,7 @@ var syncDb = require('./lib/sync-db.js');
 var syncEvents = require('./lib/sync-events.js')();
 var transferDb = require('./lib/transfer-db.js');
 var utility = require('./lib/utility.js');
+var knownSharesDb = require('./lib/known-shares-db.js');
 
 var BlnConfigError = require('./errors/bln-config.js');
 
@@ -66,25 +67,20 @@ SyncFactory.prototype.updateSelectiveSync = function(newIgnoredIds) {
   });
 }
 
-SyncFactory.prototype.initializeIgnoreDb = function(nodes) {
-  return new Promise((resolve, reject) => {
-    this.connectDbs({transferDb: true, queueErrorDb: true, sybcDb: true}, err => {
-      if(err) return reject(err);
-
-      selective.initializeIgnoreDb(nodes, (err) => {
-        if(err) return reject(err);
-
-        resolve();
-      });
-    });
-  });
-}
-
 SyncFactory.prototype.getIgnoredRemoteIds = function(callback) {
   this.connectDbs({transferDb: true, queueErrorDb: true, syncDb: true}, (err) => {
     if(err) return callback(err);
 
     selective.getIgnoredRemoteIds(callback);
+  });
+}
+
+
+SyncFactory.prototype.ignoreNewShares = function(callback) {
+  this.connectDbs({transferDb: true, queueErrorDb: true, syncDb: true}, (err) => {
+    if(err) return callback(err);
+
+    selective.ignoreNewShares(callback);
   });
 }
 
@@ -585,6 +581,14 @@ SyncFactory.prototype.connectDbs = function(excludeDbs, callback) {
       if(this.stopped) return cb(null);
 
       ignoreDb.connect(instanceDir, cb);
+    },
+    (cb) => {
+      if(excludeDbs.knownSharesDb) return cb(null);
+
+      logger.debug('Connecting knownSharesDb', {category: 'sync.main', stopped: this.stopped});
+      if(this.stopped) return cb(null);
+
+      knownSharesDb.connect(instanceDir, cb);
     },
     (cb) => {
       if(excludeDbs.queueErrorDb) return cb(null);

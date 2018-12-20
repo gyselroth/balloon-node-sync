@@ -3,6 +3,7 @@ var sinon = require('sinon');
 //Objects to mock
 var syncDb = require('../../../lib/sync-db.js');
 var ignoreDb = require('../../../lib/ignore-db.js');
+var knownSharesDb = require('../../../lib/known-shares-db.js');
 var transferDb = require('../../../lib/transfer-db.js');
 var fsWrap = require('../../../lib/fs-wrap.js');
 var blnApi = require('../../../lib/bln-api.js');
@@ -12,6 +13,7 @@ var queueErrorDb = require('../../../lib/queue/queue-error-db.js');
 //Mock objects and mock object factories
 var syncDbFactory = require('./sync-db-factory.js');
 var ignoreDbFactory = require('./ignore-db-factory.js');
+var knownSharesDbFactory = require('./known-shares-db-factory.js');
 var transferDbFactory = require('./transfer-db-factory.js');
 var fsWrapFactory = require('./fs-wrap-factory.js');
 var blnApiFactory = require('./bln-api-factory.js');
@@ -24,6 +26,7 @@ var mockController = function() {
 mockController.prototype.setup = function(pathFixtures) {
   this.registry.syncDb = syncDbFactory(pathFixtures);
   this.registry.ignoreDb = ignoreDbFactory(pathFixtures);
+  this.registry.knownSharesDb = knownSharesDbFactory(pathFixtures);
   this.registry.transferDb = transferDbFactory(pathFixtures);
   this.registry.fsWrap = fsWrapFactory(pathFixtures);
   this.registry.blnApi = blnApiFactory(pathFixtures);
@@ -35,6 +38,10 @@ mockController.prototype.setup = function(pathFixtures) {
 
   Object.keys(this.registry.ignoreDb.mock).forEach((key) => {
     sinon.stub(ignoreDb, key, this.registry.ignoreDb.mock[key]);
+  });
+
+  Object.keys(this.registry.knownSharesDb.mock).forEach((key) => {
+    sinon.stub(knownSharesDb, key, this.registry.knownSharesDb.mock[key]);
   });
 
   Object.keys(this.registry.transferDb.mock).forEach((key) => {
@@ -66,6 +73,10 @@ mockController.prototype.tearDown = function() {
     ignoreDb[key].restore();
   });
 
+  Object.keys(this.registry.knownSharesDb.mock).forEach((key) => {
+    knownSharesDb[key].restore();
+  });
+
   Object.keys(this.registry.transferDb.mock).forEach((key) => {
     transferDb[key].restore();
   });
@@ -87,6 +98,7 @@ mockController.prototype.tearDown = function() {
 
   this.registry.syncDb.tearDown();
   this.registry.ignoreDb.tearDown();
+  this.registry.knownSharesDb.tearDown();
   this.registry.queueErrorDb.tearDown();
 
   //reset this.registry
