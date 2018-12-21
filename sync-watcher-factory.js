@@ -151,7 +151,7 @@ SyncFactory.prototype._initializeRemoteWatcher = function() {
   this.remoteWatcher.on('changes', (changes) => {
     logger.debug('remote watcher emmited changes', {category: 'sync.watcher', changes, paused: this.paused})
 
-    selective.updateIgnoreDb(err => {
+    selective.updateRemotePaths(err => {
       if(this.paused === false) {
         this.emit('changed', 'remote');
       }
