@@ -77,7 +77,7 @@ SyncFactory.prototype.getIgnoredRemoteIds = function(callback) {
 
 
 SyncFactory.prototype.ignoreNewShares = function(callback) {
-  this.connectDbs({transferDb: true, queueErrorDb: true, syncDb: true}, (err) => {
+  this.connectDbs({transferDb: true, queueErrorDb: true}, (err) => {
     if(err) return callback(err);
 
     selective.ignoreNewShares(callback);
