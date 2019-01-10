@@ -1,0 +1,41 @@
+{
+  "reset": false,
+  "cursor": "c",
+  "has_more": false,
+  "nodes": [
+    {
+      "id": "2",
+      "directory": true,
+      "deleted": {
+          "sec": 1483966522,
+          "usec": 740002
+      },
+      "created": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740001
+      },
+      "path": "/b"
+    },
+    {
+      "id": "4",
+      "directory": true,
+      "deleted": {
+          "sec": 1483966522,
+          "usec": 740002
+      },
+      "created": {
+          "sec": 1483966522,
+          "usec": 740000
+      },
+      "changed": {
+          "sec": 1483966522,
+          "usec": 740001
+      },
+      "path": "/c/a"
+    }
+  ]
+}

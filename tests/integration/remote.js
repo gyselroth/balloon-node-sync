@@ -23,6 +23,11 @@ describe('remote', function() {
       'title': 'Deletes directories localy',
       'fixtures': 'remote/delete-dir'
     },
+    //sometimes deleted flag is not boolean, but a timestamp
+    {
+      'title': 'Deletes directories localy',
+      'fixtures': 'remote/delete-dir-withtimestamp'
+    },
     {
       'title': 'Creates files localy',
       'fixtures': 'remote/create-file'

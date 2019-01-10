@@ -4,6 +4,7 @@
 
 * CORE [FIX] Avoid loosing remote history #20
 * CORE [FIX] avoid deleting a node if its ino changes after getDelta starts #23
+* CORE [FIX] deleted flag might be a timestamp instead of a boolean #24
 
 
 ## 0.2.5
