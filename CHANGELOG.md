@@ -1,8 +1,9 @@
 ## 0.3.0
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**: 
+**Date**:
 
 * CORE [FIX] Avoid loosing remote history #20
+* CORE [FIX] avoid deleting a node if its ino changes after getDelta starts #23
 
 
 ## 0.2.5
