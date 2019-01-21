@@ -322,6 +322,8 @@ SyncFactory.prototype.processFileChanges = function(callback) {
 
 SyncFactory.prototype.processRemoves = function(callback) {
   syncDb.walkTree('/', true, true, (node, parentNode, cb) => {
+    if(node.localParent !== parentNode._id) return cb();
+
     this.processRemove(node, cb);
   }, callback);
 }

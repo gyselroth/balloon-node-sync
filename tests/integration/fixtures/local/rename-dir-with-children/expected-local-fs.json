@@ -6,6 +6,6 @@
     {"name": "b", "stat": {"ino": "2", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/a2", "directory": true}
   ],
   "/a2/b": [
-    {"name": "c", "stat": {"ino": "3", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/2/b", "directory": true}
+    {"name": "c", "stat": {"ino": "3", "size": 2, "mtime": "2017-01-18T00:00:00.000Z", "ctime": "2017-01-18T00:00:00.000Z"}, "parent": "/a2/b", "directory": true}
   ]
 }
