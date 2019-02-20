@@ -1,6 +1,13 @@
+## 0.4.0
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Wed February 20 14:55:23 CET 2019
+
+* No updates
+
+
 ## 0.3.0-rc1
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**:
+**Date**: Thu February 07 12:51:25 CET 2019
 
 * CORE: [FIX] Avoid deleting moved/renamed files #25
 * CORE: [FIX] deleted flag might be a timestamp instead of a boolean #24

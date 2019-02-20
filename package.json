@@ -1,8 +1,8 @@
 {
   "name": "@gyselroth/balloon-node-sync",
-  "version": "0.3.0-rc1",
+  "version": "0.4.0",
   "description": "Sync client for balloon",
-  "author": "gyselroth GmbH  <maint@gyselroth.com>",
+  "author": "gyselroth GmbH <opensource@gyselroth.net>",
   "copyright": "© 2018-2019, gyselroth GmbH",
   "homepage": "https://www.gyselroth.com",
   "license": "MIT",
