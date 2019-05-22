@@ -43,7 +43,7 @@ SyncFactory.prototype.start = function() {
       ignoreDb.connect(config.get('instanceDir'), cb);
     },
     (cb) => {
-      logger.debug('Update renote paths in ignore db', {category: 'sync.watcher'});
+      logger.debug('Update remote paths in ignore db', {category: 'sync.watcher'});
 
       selective.updateRemotePaths(cb);
     },

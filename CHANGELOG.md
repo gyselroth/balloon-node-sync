@@ -1,3 +1,10 @@
+## 0.5.0
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Wed May 23 14:41:34 CEST 2019
+
+* CORE: [FEATURE] Two Factor authentication https://github.com/gyselroth/balloon-client-desktop/issues/186
+
+
 ## 0.4.0
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed February 20 14:55:23 CET 2019
