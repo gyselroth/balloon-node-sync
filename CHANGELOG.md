@@ -7,11 +7,26 @@
 
 ## 0.4.0
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**: Wed February 20 12:33:34 CET 2019
+**Date**: Wed February 20 14:55:23 CET 2019
+
+* No updates
+
+
+## 0.3.0-rc1
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Thu February 07 12:51:25 CET 2019
+
+* CORE: [FIX] Avoid deleting moved/renamed files #25
+* CORE: [FIX] deleted flag might be a timestamp instead of a boolean #24
+* CORE: [FIX] If a nodes ino changes after localDelta.getDelta started it might be accidentally deleted #23
+
+
+## 0.3.0-beta2
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Fri Dezember 21 17:21:34 CET 2018
 
 * CORE: [FIX] Avoid loosing remote history #20
 * CORE: [FIX] avoid deleting a node if its ino changes after getDelta starts #23
-* CORE: [FIX] deleted flag might be a timestamp instead of a boolean #24
 
 
 ## 0.2.5
