@@ -1,3 +1,9 @@
+## 0.5.1
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Wed May 23 14:41:34 CEST 2019
+
+* CORE: [FIX] Fix ESOCKETIMEOUT during initial download is not correctly rescheduled
+
 ## 0.5.0
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed May 23 14:41:34 CEST 2019
