@@ -26,6 +26,10 @@ describe('apply-errors', function() {
     {
       'title': 'Upload with ENOENT is rescheduled if even if node has been renamed and got a new ino meanwhile',
       'fixtures': 'apply-errors/test-5'
+    },
+    {
+      'title': 'Download with ESOCKETTIMEDOUT is rescheduled',
+      'fixtures': 'apply-errors/test-6'
     }
   ];
 

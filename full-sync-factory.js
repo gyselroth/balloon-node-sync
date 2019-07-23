@@ -666,7 +666,7 @@ SyncFactory.prototype.applyQueueError = function(error, callback) {
               {'remoteActions.delete.remoteId': remoteId},
             ]};
 
-            syncDb.find(query, (err, syncedNode) => {
+            syncDb.findOne(query, (err, syncedNode) => {
               if(!syncedNode) {
                 syncDb.create(errorNode, (err) => {
                   if(err) return callback(err);

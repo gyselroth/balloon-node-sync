@@ -1,0 +1,19 @@
+[
+  {
+    "err": {"code":"ESOCKETTIMEDOUT"},
+    "task": {
+      "action":"download",
+      "created":"2017-01-19T00:00:00.000Z",
+      "node": {
+        "name":"a.txt", "parent":"/", "directory":false,"remoteParent":"",
+        "remoteActions": {
+          "create":{
+            "hash":"6d85622054f21244f6974b368a35130c","version":1,"remoteId":"2", "remoteParent":"","parent":"/","size":2, "actionInitialized":"2017-01-19T00:00:00.000Z"
+          }
+        }
+      }
+    },
+    "origin":"remote",
+    "_id":"0"
+  }
+]
