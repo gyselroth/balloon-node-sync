@@ -3,6 +3,7 @@
 **Date**:
 
 * CORE: [FIX] Fix garbage collector #27
+* CORE: [FIX] Fix name is not defined #28
 
 ## 0.5.1
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
