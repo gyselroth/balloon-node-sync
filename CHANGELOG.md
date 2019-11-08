@@ -1,3 +1,9 @@
+## 0.5.2
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**:
+
+* CORE: [FIX] Fix garbage collector #27
+
 ## 0.5.1
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed May 23 13:41:34 CEST 2019
