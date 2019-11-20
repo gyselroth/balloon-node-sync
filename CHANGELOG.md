@@ -2,11 +2,11 @@
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed Nov 20 11:57:22 CET 2019
 
-## Bugfixes
+### Bugfixes
 * Fix garbage collector #27
 * Fix name is not defined #28
 
-## Common
+### Common
 * Starting with v0.5.2 the changelog has a new format, all changes get splitted into sub categeories within the changelog to get a better readability.
 
 
