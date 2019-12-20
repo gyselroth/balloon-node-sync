@@ -558,6 +558,34 @@ SyncFactory.prototype.cleanDatabase = function(callback) {
       syncDb.getDb().remove({$where: function() {return !this.remoteId || (!this.ino && !this.downloadOriginal)}}, {multi: true}, cb);
     },
     (cb) => {
+      //remove duplicate remoteId's.
+      syncDb.find({}, (err, docs) => {
+        const groupKey = 'remoteId';
+        const sortKey = 'mtime';
+
+        const grouped = docs.reduce(function(acc, x) {
+          acc[x[groupKey]] ? acc[x[groupKey]].push(x) : acc[x[groupKey]] = [x];
+          return acc;
+        }, {});
+
+        async.map(grouped, (group, mapCb) => {
+          if(group.length === 1) return mapCb();
+
+          group.sort((a, b) => {
+            if(a[sortKey] === b[sortKey]) return 0;
+
+            return a[sortKey] > b[sortKey] ? 1 : -1;
+          });
+
+          group.pop();
+
+          async.map(group, (node, map2Cb) => {
+            syncDb.remove(node._id, map2Cb);
+          }, mapCb);
+        }, cb);
+      });
+    },
+    (cb) => {
       // remove all local and remote actions
       syncDb.getDb().update({}, {$unset: {localActions: true, remoteActions: true}}, {multi: true}, cb);
     }

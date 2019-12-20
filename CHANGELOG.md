@@ -3,7 +3,8 @@
 **Date**:
 
 ### Bugfixes
-* Handle error code 20 when moving a share #29 
+* Handle error code 20 when moving a share #29
+* Remove duplicate nodes from sync-db #30
 
 ## 0.5.2
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
