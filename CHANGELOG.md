@@ -1,6 +1,6 @@
 ## 0.5.3
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**:
+**Date**: Wed Jan 08 15:59:44 CET 2020
 
 ### Bugfixes
 * Handle error code 20 when moving a share #29
