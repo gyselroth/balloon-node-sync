@@ -33,35 +33,35 @@ mockController.prototype.setup = function(pathFixtures) {
   this.registry.queueErrorDb = queueErrorDbFactory(pathFixtures);
 
   Object.keys(this.registry.syncDb.mock).forEach((key) => {
-    sinon.stub(syncDb, key, this.registry.syncDb.mock[key]);
+    sinon.stub(syncDb, key).callsFake(this.registry.syncDb.mock[key]);
   });
 
   Object.keys(this.registry.ignoreDb.mock).forEach((key) => {
-    sinon.stub(ignoreDb, key, this.registry.ignoreDb.mock[key]);
+    sinon.stub(ignoreDb, key).callsFake(this.registry.ignoreDb.mock[key]);
   });
 
   Object.keys(this.registry.knownSharesDb.mock).forEach((key) => {
-    sinon.stub(knownSharesDb, key, this.registry.knownSharesDb.mock[key]);
+    sinon.stub(knownSharesDb, key).callsFake(this.registry.knownSharesDb.mock[key]);
   });
 
   Object.keys(this.registry.transferDb.mock).forEach((key) => {
-    sinon.stub(transferDb, key, this.registry.transferDb.mock[key]);
+    sinon.stub(transferDb, key).callsFake(this.registry.transferDb.mock[key]);
   });
 
   Object.keys(this.registry.fsWrap.mock).forEach((key) => {
-    sinon.stub(fsWrap, key, this.registry.fsWrap.mock[key]);
+    sinon.stub(fsWrap, key).callsFake(this.registry.fsWrap.mock[key]);
   });
 
   Object.keys(this.registry.blnApi.mock).forEach((key) => {
-    sinon.stub(blnApi, key, this.registry.blnApi.mock[key]);
+    sinon.stub(blnApi, key).callsFake(this.registry.blnApi.mock[key]);
   });
 
   Object.keys(this.registry.queueErrorDb.mock).forEach((key) => {
-    sinon.stub(queueErrorDb, key, this.registry.queueErrorDb.mock[key]);
+    sinon.stub(queueErrorDb, key).callsFake(this.registry.queueErrorDb.mock[key]);
   });
 
-  sinon.stub(lastCursor, 'get', function() {return 'a'});
-  sinon.stub(lastCursor, 'set', function(cursor) {});
+  sinon.stub(lastCursor, 'get').callsFake(function() {return 'a'});
+  sinon.stub(lastCursor, 'set').callsFake(function(cursor) {});
 }
 
 mockController.prototype.tearDown = function() {

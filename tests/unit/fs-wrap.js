@@ -47,7 +47,7 @@ describe('fsWrap', function() {
       return node;
     };
 
-    sinon.stub(fsWrap, 'md5FileSync', function() {
+    sinon.stub(fsWrap, 'md5FileSync').callsFake(function() {
       return '5a105e8b9d40e1329780d62ea2265d8a';
     });
 

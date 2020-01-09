@@ -26,7 +26,7 @@ config.setAll({
 
 function stubApiRequest(expectdResult) {
   var result = expectdResult || {};
-  sinon.stub(fs, 'createReadStream', function() {
+  sinon.stub(fs, 'createReadStream').callsFake(function() {
     var rs = new stream.Readable();
     rs._read = function(n) {
       return '';
@@ -35,7 +35,7 @@ function stubApiRequest(expectdResult) {
     return rs;
   });
 
-  sinon.stub(blnApiRequest, 'sendRequest', function() {
+  sinon.stub(blnApiRequest, 'sendRequest').callsFake(function() {
     arguments[arguments.length - 1](null, result);
     //TODO pixtron - return a request mock
     return {
@@ -51,7 +51,7 @@ function stubApiRequest(expectdResult) {
     }
   });
 
-  sinon.stub(blnApiRequest, 'sendStreamingRequest', function() {
+  sinon.stub(blnApiRequest, 'sendStreamingRequest').callsFake(function() {
     //TODO pixtron - return a request mock
     var emitter = new events.EventEmitter();
     var stub = {
@@ -80,11 +80,11 @@ describe('blnApi', function() {
   before(function() {
     mockdate.set('1/20/2017');
 
-    sinon.stub(fsWrap, 'createWriteStream', function() {
+    sinon.stub(fsWrap, 'createWriteStream').callsFake(function() {
       return stream.Writable;
     });
 
-    sinon.stub(fsWrap, 'lstatSync', function() {
+    sinon.stub(fsWrap, 'lstatSync').callsFake(function() {
       return {
         size: 2,
         ino: 1,
@@ -92,7 +92,7 @@ describe('blnApi', function() {
       };
     });
 
-    sinon.stub(utility, 'uuid4', function() {
+    sinon.stub(utility, 'uuid4').callsFake(function() {
       return '58a5fae2-431a-4fbb-83f3-5c4f4fb9773c';
     });
   });
@@ -188,10 +188,10 @@ describe('blnApi', function() {
 
   describe('uploadFile', function() {
     before(function() {
-      sinon.stub(fsWrap, 'existsSync', function(path) {
+      sinon.stub(fsWrap, 'existsSync').callsFake(function(path) {
         return path === '/a.txt';
       });
-      sinon.stub(transferDb, 'getUploadByTransferId', function(transferId, callback) {
+      sinon.stub(transferDb, 'getUploadByTransferId').callsFake(function(transferId, callback) {
         var newTransfer = {
           type: 'upload',
           transferId,
@@ -202,10 +202,10 @@ describe('blnApi', function() {
 
         callback(null, newTransfer);
       });
-      sinon.stub(transferDb, 'remove', function(id, callback) {
+      sinon.stub(transferDb, 'remove').callsFake(function(id, callback) {
         callback(null);
       });
-      sinon.stub(transferDb, 'update', function(id, newTransfer, callback){
+      sinon.stub(transferDb, 'update').callsFake(function(id, newTransfer, callback){
         callback(null);
       })
     });
@@ -262,7 +262,7 @@ describe('blnApi', function() {
 
   describe('downloadFile', function() {
     before(function() {
-      sinon.stub(transferDb, 'getDownloadByTransferId', function(transferId, callback) {
+      sinon.stub(transferDb, 'getDownloadByTransferId').callsFake(function(transferId, callback) {
         var result = {
           activeTransfer: {
             type: 'download',
@@ -277,7 +277,7 @@ describe('blnApi', function() {
       });
     });
 
-    sinon.stub(fsWrap, 'existsSyncTemp', function() { return false});
+    sinon.stub(fsWrap, 'existsSyncTemp').callsFake(function() { return false});
 
     it('should call the correct endpoint', function(done) {
       stubApiRequest();
