@@ -36,7 +36,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "dateformat": "^3.0.3",
-    "escape-string-regexp": "^1.0.5",
+    "escape-string-regexp": "^2.0.0",
     "fs-extra": "^7.0.1",
     "md5-file": "^4.0.0",
     "nedb": "^1.8.0",
