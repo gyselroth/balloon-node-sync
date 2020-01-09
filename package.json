@@ -45,8 +45,5 @@
     "unorm": "^1.4.1",
     "uuid4": "^1.1.4",
     "winston": "^2.4.4"
-  },
-  "optionalDependencies": {
-    "@gyselroth/windows-fsstat": "^0.0.7"
   }
 }
