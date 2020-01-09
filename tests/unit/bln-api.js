@@ -1,6 +1,7 @@
 var fs = require('fs');
 
 var stream = require('stream');
+var events = require('events');
 var chai = require('chai');
 var assert = chai.assert;
 var sinon = require('sinon');
@@ -26,7 +27,12 @@ config.setAll({
 function stubApiRequest(expectdResult) {
   var result = expectdResult || {};
   sinon.stub(fs, 'createReadStream', function() {
-    return new stream.Readable();
+    var rs = new stream.Readable();
+    rs._read = function(n) {
+      return '';
+    }
+
+    return rs;
   });
 
   sinon.stub(blnApiRequest, 'sendRequest', function() {
@@ -47,17 +53,26 @@ function stubApiRequest(expectdResult) {
 
   sinon.stub(blnApiRequest, 'sendStreamingRequest', function() {
     //TODO pixtron - return a request mock
-    return {
+    var emitter = new events.EventEmitter();
+    var stub = {
       pipe: function() {},
-      on: function() {},
+      on: function(event, cb) {
+        emitter.on(event, cb);
+      },
       pause: function() {},
       resume: function() {},
       ondata: function() {},
       once: function() {},
-      emit: function() {},
+      emit: function(event) {},
       end: function() {},
       write: function() {}
     }
+
+    setTimeout(() => {
+      emitter.emit('error', 'emitting an error to stop request');
+    }, 1);
+
+    return stub;
   });
 }
 
@@ -262,17 +277,22 @@ describe('blnApi', function() {
       });
     });
 
-    it('should call the correct endpoint', function() {
+    sinon.stub(fsWrap, 'existsSyncTemp', function() { return false});
+
+    it('should call the correct endpoint', function(done) {
       stubApiRequest();
 
       var node = {remoteId: '1', parent: '/', name: 'a.txt'};
       blnApi.downloadFile('1', 1, node, sinon.spy());
 
       blnApiRequest.sendStreamingRequest.should.have.been.calledWith('get', '/node', {id: node.remoteId, download: true, offset: 0});
+
+      setTimeout(done, 2);
     });
 
     after(function() {
       transferDb.getDownloadByTransferId.restore();
+      fsWrap.existsSyncTemp.restore();
     })
   });
 
