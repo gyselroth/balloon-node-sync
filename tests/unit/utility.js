@@ -179,7 +179,7 @@ describe('utility', function() {
   describe('renameConflictNode', function() {
     before(function() {
 
-      sinon.stub(fs, 'existsSync', function(filename) {
+      sinon.stub(fs, 'existsSync').callsFake(function(filename) {
         var presentFiles = [
           '/Users/username/Balloon/b-conflict-username-20.01.2017-00.00.txt',
           '/Users/username/Balloon/c-conflict-username-20.01.2017-00.00.txt',
@@ -231,7 +231,7 @@ describe('utility', function() {
     });
 
     after(function() {
-      sinon.restore(fs, 'existsSync');
+      fs.existsSync.restore();
     });
   });
 

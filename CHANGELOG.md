@@ -1,3 +1,15 @@
+## 0.6.0
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Wed Jan 10 01:16:44 CET 2020
+
+### Changes
+* Remove @gyselroth/windows-fsstat dependency #31
+
+### Common
+* Update dependencies
+* Update node version to v12
+
+
 ## 0.5.3
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed Jan 08 15:59:44 CET 2020
