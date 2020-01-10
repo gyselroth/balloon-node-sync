@@ -1,6 +1,6 @@
 ## 0.6.1
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**: 
+**Date**: Wed Jan 10 19:03:44 CET 2020
 
 ### Changes
 * Update winston to v3.2 #33
