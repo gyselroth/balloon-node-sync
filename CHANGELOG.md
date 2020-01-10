@@ -5,6 +5,9 @@
 ### Changes
 * Remove @gyselroth/windows-fsstat dependency #31
 
+### Common
+* Update dependencies
+* Update node version to v12
 
 ## 0.5.3
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
