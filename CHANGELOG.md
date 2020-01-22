@@ -1,3 +1,11 @@
+## 0.6.2
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**:
+
+### Bugfixes
+* Fix TypeError: Cannot mix BigInt and other types during upload #35
+
+
 ## 0.6.1
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed Jan 10 19:03:44 CET 2020
