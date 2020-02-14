@@ -1,3 +1,11 @@
+## 0.6.3
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Fri Feb 14 02:39:23 CET 2020
+
+### Changes
+* Add error codes E_BLN_API_REQUEST_QUOTA_FULL and E_BLN_API_REQUEST_NETWORK #37
+
+
 ## 0.6.2
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed Jan 22 23:08:34 CET 2020

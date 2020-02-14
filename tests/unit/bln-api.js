@@ -69,7 +69,7 @@ function stubApiRequest(expectdResult) {
     }
 
     setTimeout(() => {
-      emitter.emit('error', 'emitting an error to stop request');
+      emitter.emit('bln-error', 'emitting an error to stop request');
     }, 1);
 
     return stub;
