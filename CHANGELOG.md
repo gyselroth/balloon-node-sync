@@ -1,3 +1,14 @@
+## 0.6.4
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Mon Feb 17 19:08:30 CET 2020
+
+### Bugfixes
+* file upload should send exact chunkSize #40
+
+### Changes
+* Don't start download progress logging before initial response #39
+
+
 ## 0.6.3
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Fri Feb 14 02:39:23 CET 2020
