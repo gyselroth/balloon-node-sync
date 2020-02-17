@@ -4,6 +4,7 @@
 
 ### Bugfixes
 * do not cache apiUrl #42
+* Log response body for failed download requests #22
 
 
 ## 0.6.4
