@@ -5,7 +5,7 @@
 ### Bugfixes
 * do not cache apiUrl #42
 * Log response body for failed download requests #22
-
+* Use Buffer.from() instead of new Buffer() #43
 
 ## 0.6.4
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
