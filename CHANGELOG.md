@@ -5,6 +5,8 @@
 ### Bugfixes
 * file upload should send exact chunkSize #40
 
+### Changes
+* Don't start download progress logging before initial response #39
 
 ## 0.6.3
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
