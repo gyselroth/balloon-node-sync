@@ -1,5 +1,13 @@
 ## 0.6.4
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**:
+
+### Bugfixes
+* do not cache apiUrl #42
+
+
+## 0.6.4
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Mon Feb 17 19:08:30 CET 2020
 
 ### Bugfixes
