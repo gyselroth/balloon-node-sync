@@ -207,7 +207,13 @@ describe('blnApi', function() {
       });
       sinon.stub(transferDb, 'update').callsFake(function(id, newTransfer, callback){
         callback(null);
-      })
+      });
+      sinon.stub(fs, 'watch').callsFake(function() {
+        return {
+          close: function() {}
+        }
+      });
+      sinon.stub(fs, 'watchFile').callsFake(function() {});
     });
 
     it('should call the correct endpoint', function() {
@@ -257,6 +263,8 @@ describe('blnApi', function() {
       transferDb.getUploadByTransferId.restore();
       transferDb.remove.restore();
       transferDb.update.restore();
+      fs.watch.restore();
+      fs.watchFile.restore();
     });
   });
 

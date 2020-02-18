@@ -1,3 +1,16 @@
+## 0.6.5
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Tue Feb 18 03:14:04 CET 2020
+
+### Bugfixes
+* do not cache apiUrl #42
+* Log response body for failed download requests #22
+* Use Buffer.from() instead of new Buffer() #43
+
+### Changes
+* Cancel upload if file has been changed or deleted #44
+
+
 ## 0.6.4
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Mon Feb 17 19:08:30 CET 2020
