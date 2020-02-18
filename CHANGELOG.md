@@ -1,6 +1,6 @@
 ## 0.5.4
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**:
+**Date**: Tue Feb 18 14:44:16 CET 2020
 
 ### Bugfixes
 * file upload should send exact chunkSize #40
@@ -13,6 +13,7 @@
 ### Bugfixes
 * Handle error code 20 when moving a share #29
 * Remove duplicate nodes from sync-db #30
+
 
 ## 0.5.2
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
