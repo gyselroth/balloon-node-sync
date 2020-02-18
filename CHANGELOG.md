@@ -1,3 +1,11 @@
+## 0.5.4
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**:
+
+### Bugfixes
+* file upload should send exact chunkSize #40
+
+
 ## 0.5.3
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Wed Jan 08 15:59:44 CET 2020
