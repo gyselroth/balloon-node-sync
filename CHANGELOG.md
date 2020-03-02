@@ -1,6 +1,6 @@
 ## 0.6.6
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
-**Date**:
+**Date**: Mon Mar 01 23:46:25 CET 2020
 
 ### Changes
 * Use api v2 for whomai calls #46
