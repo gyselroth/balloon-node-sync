@@ -3,7 +3,7 @@
 **Date**: Mon Mar 01 23:46:25 CET 2020
 
 ### Changes
-* Use api v2 for whomai calls #46
+* Use api v2 for whoami calls #46
 
 
 ## 0.6.5
