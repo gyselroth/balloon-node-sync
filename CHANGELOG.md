@@ -1,3 +1,11 @@
+## 0.6.6
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**:
+
+### Changes
+* Use api v2 for whomai calls #46
+
+
 ## 0.6.5
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Tue Feb 18 03:14:04 CET 2020
