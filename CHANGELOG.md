@@ -1,3 +1,11 @@
+## 0.6.7
+**Maintainer**: balloon-team <opensource@gyselroth.net>\
+**Date**: Mon Jun 22 16:29:12 CET 2020
+
+### Changes
+* Do not delete ignored nodes remotely #48
+
+
 ## 0.6.6
 **Maintainer**: balloon-team <opensource@gyselroth.net>\
 **Date**: Mon Mar 01 23:46:25 CET 2020

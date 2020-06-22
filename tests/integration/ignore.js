@@ -27,6 +27,10 @@ describe('ignore', function() {
       'title': 'creates local nodes if ignored path has been localy renamed',
       'fixtures': 'ignore/test-5'
     },
+    {
+      'title': 'should not remotely delete nodes which are at an ignored path',
+      'fixtures': 'ignore/test-6'
+    },
   ];
 
   tests.forEach(function(test) {
