@@ -1,0 +1,4 @@
+[
+  {"name":"a","ino":"1","size":2,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/","directory":true,"remoteId":"1","remoteParent":"","localParent":null,"_id":"0"},
+  {"name":"a.txt","ino":"2","size":4,"hash":"71e36b59188960ec7a8c1355b5dc7873","version":1,"mtime":"2017-01-18T00:00:00.000Z","ctime":"2017-01-18T00:00:00.000Z","parent":"/a","directory":false,"remoteId":"2","remoteParent":"1","localParent":"0","_id":"1"}
+]
